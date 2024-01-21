@@ -1,10 +1,11 @@
 
 import './App.css';
-import SignUpForm from './Components/Admin/SignUpForm';
+import Navbar from './Components/Admin/Navbar';
+//import SignUpForm from './Components/Admin/Navbar';
 function App() {
   return (
     <div className="App">
-    <SignUpForm/>
+    <Navbar/>
     </div>
   );
 }
