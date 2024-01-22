@@ -71,7 +71,7 @@ const Navbar = () => {
       <Sidebar />
       </div>
       <div className='compos'>
-      <DashboardCards />
+      {/* <DashboardCards /> */}
       </div>
       </div>
     </>
