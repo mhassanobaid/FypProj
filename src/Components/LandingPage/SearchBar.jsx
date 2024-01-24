@@ -12,7 +12,7 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <div className='Search-bar'>
+    <div>
       <label>
       <img src="/icons/locationIcon.png" alt="loc" height="31px" width="30px" className='img-Loc'/>
         <input type="text" placeholder="Where to" value={location} onChange={(e) => setLocation(e.target.value) } />

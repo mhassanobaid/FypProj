@@ -1,11 +1,16 @@
 
 import './App.css';
+
 import SignUpForm from './Components/Admin/SignUpForm';
 import Footer from './Components/LandingPage/headerFooterComp/Footer';
 import Header from './Components/LandingPage/headerFooterComp/Header';
 import SearchBar from './Components/LandingPage/SearchBar';
 import TourCard from './Components/LandingPage/TourCard';
 import ReviewSlider from './Components/LandingPage/ReviewSlider';
+
+import Navbar from './Components/Admin/Navbar';
+//import SignUpForm from './Components/Admin/Navbar';
+
 function App() {
 
   
@@ -65,6 +70,7 @@ function App() {
 
   return (
     <div className="App">
+
     {/*<SignUpForm/>*/}
 
     
@@ -113,6 +119,9 @@ function App() {
             <Footer className="footer-in-main"/>
             
             
+
+    <Navbar/>
+
     </div>
   );
 }
