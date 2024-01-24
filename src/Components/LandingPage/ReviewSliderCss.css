@@ -1,0 +1,86 @@
+
+.wrapper
+{
+       width: 100%;
+       height: 300px;
+       background-color: wheat;
+       
+       padding: 1rem; 
+       display: flex;
+       align-items: center;
+}
+.box-for-review
+{
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10px;
+}
+
+
+.revieW
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.revieW .review-Slider
+{
+    /* border: 1px solid;
+    padding: 1rem; */
+
+}
+
+.revieW .review-Slider .box-for-review
+{
+  border: 0px solid red;
+  background: #fff;
+  border-radius: .5rem;
+  text-align: center;
+  /* padding: 3rem 2rem;
+  outline-offset: -1rem;
+  outline: var(--outline); */
+  box-shadow: var(--box-shadow);
+  transition: .2s linear;
+  margin-top: 15px;
+
+}
+
+.revieW .review-Slider .box-for-review:hover
+{
+  box-shadow: 2px 3px 10px 4px green;
+}
+
+.revieW .review-Slider .box-for-review img
+{
+  height: 5rem;
+  width: 5rem;
+  
+  border-radius: 50%;
+}
+
+.revieW .review-Slider .box-for-review p
+{
+    
+    margin-top: 0;
+    
+    color: black;
+    font-size: 1.5rem;
+    
+}
+.revieW .review-Slider .box-for-review pre {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 200px;
+}
+
+
+.inline-elements
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+

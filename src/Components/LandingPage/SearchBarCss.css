@@ -1,0 +1,18 @@
+.img-Loc
+{
+  border: 1px solid black;
+  position: relative;
+  top: 11px;
+  left: 1px;
+  
+}
+.button-search-bar
+{
+  font-size: 18px;
+  padding: 5px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background-color: #1172D4;
+  color: white;
+  font-weight: bold;
+}

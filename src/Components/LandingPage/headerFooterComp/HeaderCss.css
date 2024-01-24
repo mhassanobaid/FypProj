@@ -45,3 +45,35 @@ nav a {
   margin-right: 10px;
   color:white;
 }
+
+.search-bar {
+  display: flex; /* Use flexbox */
+  align-items: center;
+  flex:1;
+  position: absolute;
+  top: 70%;
+  right: 20%;
+  color: white;
+  border: 1px solid rgb(209, 206, 206);
+  border-radius: 4px;
+  padding: 15px;
+  background-color: white;
+}
+.search-bar input {
+  padding: 5px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  margin-right: 20px; /* Adjust spacing between input fields */
+  width: 180px;
+}
+
+
+
+
+
+
+
+/* Add styles for the input fields if needed */
+

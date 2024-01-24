@@ -3,9 +3,10 @@ import React from 'react';
 import './FooterCss.css';
 
 const Footer = () => {
+    const currentYear = new Date().getFullYear();
     return (
-      <footer style={{ backgroundImage: 'url("/images/header.jpg")' }}>
-            <p>&copy; 2024 Your AdventureAceTourManagement. All rights reserved.</p>
+      <footer style={{ backgroundColor: '#1172D4' }}>
+            <p>&copy; {currentYear} AdventureAceTourManagement. All rights reserved.</p>
         </footer>
     );
 }
