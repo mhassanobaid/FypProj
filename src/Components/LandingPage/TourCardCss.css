@@ -38,5 +38,30 @@
 {
   display: inline;
  margin-left: 10px;
+ font-weight: lighter;
 }
 /* Add more styling as needed */
+.tour-card a
+{
+  color: black;
+  text-decoration: none;
+
+}
+
+.tour-card a:hover
+{
+  color: #005050;
+  .div-inside-a
+  {
+    border: 1px solid black;
+    box-shadow: 10 10 10px rgba(0, 0, 0, 0.3);
+  }
+  .data-coming-to-card
+  {
+    color: rgb(0, 126, 0);
+    font-weight: bold;
+  } 
+}
+
+
+

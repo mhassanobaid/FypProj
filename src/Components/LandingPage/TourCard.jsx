@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 const TourCard = ({ naam,image, location, price, tourists }) => {
   return (
     <div className="tour-card">
+      <a href="#">
+        <div className='div-inside-a'>
       <img src={image} alt="Tour" className="tour-image" />
       <div className="tour-details">
         <h3>{naam}</h3>
@@ -15,6 +17,8 @@ const TourCard = ({ naam,image, location, price, tourists }) => {
         <p><div class="inside-card-text">Price $ &nbsp;&nbsp;:</div><div className='data-coming-to-card'>{price}</div></p>
         <p><div class="inside-card-text">Tourists:&nbsp;</div><div className='data-coming-to-card'>{tourists}</div></p>
       </div>
+      </div>
+      </a>
     </div>
   );
 };

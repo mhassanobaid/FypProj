@@ -86,14 +86,7 @@
 /* Reset some default styles */
 
 
-*
-{
-padding: 0;
-margin: 0;
-box-sizing:border-box;
-font-family: 'Poppins',sans-serif;
 
-}
 /* Define root colors and styling variables */
 /* :root {
   --primary-color: #007bff;

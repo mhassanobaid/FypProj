@@ -92,21 +92,7 @@ function App() {
               ))}
       
           </div>
-          {/* <div className='review-landing-outer'>
-            <div className='review-landing left'>
-              <p className='para-review'>It was nice tour. We went to hunza valley where we will hike mountains. Everything was awesome. Enjoyed alot.
-              We will eat healthy food and all facilities were very good. Rooms were furnished. Vehicles were also soothing</p>
-
-            </div>
-            <div className='review-landing'>
- <p className='para-review'>It was nice tour. We went to hunza valley where we will hike mountains. Everything was awesome. Enjoyed alot.
-              We will eat healthy food and all facilities were very good. Rooms were furnished. Vehicles were also soothing</p>
-            </div>
-            <div className='review-landing right'>
-            <p className='para-review'>It was nice tour. We went to hunza valley where we will hike mountains. Everything was awesome. Enjoyed alot.
-              We will eat healthy food and all facilities were very good. Rooms were furnished. Vehicles were also soothing</p>
-            </div>
-            </div> */}
+        
             <section className='review-land' id='rv-land'>
               <h3 className='h1-in-rv'>What Users say about us</h3>
             
@@ -120,7 +106,7 @@ function App() {
             
             
 
-    <Navbar/>
+
 
     </div>
   );
