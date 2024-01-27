@@ -8,11 +8,14 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Sidebar from './Sidebar';
 import DashboardCards from './DashboardCards';
 
+import Home from './Home';
+import UserData from './UserData';
 
 const Navbar = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchType, setSearchType] = useState('user'); // Default search type
   const [isScrolled, setIsScrolled] = useState(false);
+  
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
@@ -60,18 +63,19 @@ const Navbar = () => {
           <button className="search-button">Search</button>
         </div>
         <div className="right-section">
-          <div className="logout">
-            <h3>Logout</h3>
-          </div>
+         
           <FontAwesomeIcon icon={faEnvelope} className='notification_icon' />
         </div>
       </div>
       <div className="row-container">
       <div className='compos'>
-      <Sidebar />
+      {/* <Sidebar /> */}
       </div>
       <div className='compos'>
       {/* <DashboardCards /> */}
+      {/* <Home/>
+      <UserData/> */}
+      {/* <User/> */}
       </div>
       </div>
     </>

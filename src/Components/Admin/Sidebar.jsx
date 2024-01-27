@@ -1,45 +1,53 @@
 // Sidebar.js
 
-import React from 'react';
+import {useState,useEffect}from 'react';
 import './Sidebar.css';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartBar, faBuilding, faGlobe, faUserFriends, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Import necessary icons
 import userPhoto from '../../Assets/profile.png';
 
+
 const Sidebar = () => {
+ 
+    
+
+
   return (
+    <>
     <div className="sidebar">
       <div className="profile-section">
         <div className="user-photo">
           <img src={userPhoto} alt="User" />
         </div>
-        <div className="user-name">John Doe</div>
+        <div className="user-name">Rana Zubair</div>
       </div>
       
       <div className="menu-section">
-        <div className="menu-item">
-          <FontAwesomeIcon icon={faChartBar} /> {/* Add the icon to the Dashboard menu item */}
+        <Link to="/" className="menu-item">
+          <FontAwesomeIcon icon={faChartBar} />
           Dashboard
-        </div>
-        <div className="menu-item">
-          <FontAwesomeIcon icon={faBuilding} /> {/* Add the icon to the Tour Company menu item */}
+        </Link>
+        <Link to="/tour-company" className="menu-item">
+          <FontAwesomeIcon icon={faBuilding} />
           Tour Company
-        </div>
-        <div className="menu-item">
-          <FontAwesomeIcon icon={faGlobe} /> {/* Add the icon to the Tours menu item */}
+        </Link>
+        <Link to="/tours" className="menu-item">
+          <FontAwesomeIcon icon={faGlobe} />
           Tours
-        </div>
-        <div className="menu-item">
-          <FontAwesomeIcon icon={faUserFriends} /> {/* Add the icon to the User menu item */}
+        </Link>
+        <Link to="/user" className="menu-item">
+          <FontAwesomeIcon icon={faUserFriends} />
           User
-        </div>
+        </Link>
       </div>
       
-      <div className="menu-item">
-        <FontAwesomeIcon icon={faSignOutAlt} /> {/* Add the icon to the Logout menu item */}
+      <Link to="/logout" className="menu-item">
+        <FontAwesomeIcon icon={faSignOutAlt} />
         <h3>Logout</h3>
-      </div>
+      </Link>
     </div>
+    </>
   );
 };
 

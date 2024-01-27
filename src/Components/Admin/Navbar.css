@@ -9,6 +9,7 @@
     background-color: #333; /* Set your desired background color */
     color: white; /* Set your desired text color */
     transition: background-color 0.3s ease; /* Add a smooth transition for background color change */
+    z-index:1;
   }
   
   .scrolled {
