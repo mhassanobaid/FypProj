@@ -1,4 +1,4 @@
-
+/*
 .search-bar-of-App
 {
   margin-left: 500px;
@@ -42,19 +42,20 @@
   
   margin-bottom: 180px;
 }
-.review-landing
+
+/*.review-landing
 {
   flex: 0.4; /* This makes the middle div take up the remaining space */
-  height: 300px; /* Adjust the height as needed for the middle div */
-  background-color: wheat;
+ /* height: 300px; /* Adjust the height as needed for the middle div */
+  /*background-color: wheat;
   margin: 0 10px;
 }
 
 .review-landing.left,
 .review-landing.right {
   flex: 0.3; /* This makes the left and right divs half the height of the middle one */
-  height: 220px; /* Adjust the height as needed for the left and right divs */
-  margin-top: 40px;
+/*  height: 220px; /* Adjust the height as needed for the left and right divs */
+  /*margin-top: 40px;
 }
 
 .review-landing-outer
@@ -112,7 +113,7 @@
 /* } */ 
 
 
-/*body,
+body,
 h1, h2, h3, h4, h5, h6,
 p,
 ul, ol,
@@ -134,48 +135,52 @@ hr {
 }
 
 /* Set box-sizing to border-box for all elements */
-/*,
+
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
 /* Import and apply Google Font (Roboto) */
-/*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 /* Basic styles for the body */
-/*body {
+body {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #333;
   background-color: #f5f5f5;
+  
+    overflow-x: hidden;
+  
+  
 }
 
 /* Remove default list styles */
-/*ul, ol {
+ul, ol {
   list-style: none;
 }
 
 /* Remove anchor text decoration and set color */
-/*a {
+a {
   text-decoration: none;
   color: #007bff;
 }
 
 /* Set basic styles for headings */
-/*h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 
 /* Set default styles for paragraphs */
-/*p {
+p {
   margin-bottom: 1em;
 }
 
 /* Set default styles for form elements */
-/*input,
+input,
 button,
 textarea,
 select {

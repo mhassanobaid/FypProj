@@ -18,11 +18,9 @@
     "react-icons": "^5.0.1",
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
-<<<<<<< HEAD
+
     "recharts": "^2.10.4",
-=======
     "swiper": "^11.0.5",
->>>>>>> 15c8ce7c434a96c98c6ad25b0b846d3e19846ff5
     "web-vitals": "^2.1.4"
   },
   "scripts": {

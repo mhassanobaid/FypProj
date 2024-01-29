@@ -1,5 +1,4 @@
 import './App.css';
-<<<<<<< HEAD
 import Main from './Components/Admin/Main';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from './pages/admin/Dashboard';
@@ -7,7 +6,6 @@ import UserDataRoute from './pages/admin/UserDataRoute';
 import TCDataRoute from './pages/admin/TCDataRoute';
 import TourDataRoute from './pages/admin/TourDataRouter';
 
-=======
 
 import SignUpForm from './Components/Admin/SignUpForm';
 import Footer from './Components/LandingPage/headerFooterComp/Footer';
@@ -18,7 +16,6 @@ import ReviewSlider from './Components/LandingPage/ReviewSlider';
 
 import Navbar from './Components/Admin/Navbar';
 //import SignUpForm from './Components/Admin/Navbar';
->>>>>>> 15c8ce7c434a96c98c6ad25b0b846d3e19846ff5
 
 function App() {
 
@@ -78,9 +75,10 @@ function App() {
    
 
   return (
+    <>
     <div className="App">
-<<<<<<< HEAD
-      <BrowserRouter>
+
+       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/user" element={<UserDataRoute />} />
@@ -90,18 +88,12 @@ function App() {
         </Routes>
       </BrowserRouter>
       
-=======
-
-    {/*<SignUpForm/>*/}
-
-    
-            {/* Your main content goes here */}
-            <Header/>
+        
            
             <main className='main-in-app'>
               <div className='text-div'><h4 className='package-text'>Packages</h4></div>
             <div className="tour-card-container"> 
-            {tours.map((tour) => (
+            {/* {tours.map((tour) => (
             <TourCard
               key={tour.id}
               naam = {tour.naam}
@@ -111,26 +103,27 @@ function App() {
               tourists={tour.tourists}
             />
               ))}
-      
+       */}
           </div>
         
             <section className='review-land' id='rv-land'>
               <h3 className='h1-in-rv'>What Users say about us</h3>
             
-                <ReviewSlider/>
+                {/* <ReviewSlider/> */}
 
 
             </section>
             
             </main>
-            <Footer className="footer-in-main"/>
+            {/* <Footer className="footer-in-main"/> */}
             
             
 
 
 
->>>>>>> 15c8ce7c434a96c98c6ad25b0b846d3e19846ff5
+
     </div>
+    </>
   );
 }
 

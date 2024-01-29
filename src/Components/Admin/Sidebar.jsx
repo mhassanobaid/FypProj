@@ -10,11 +10,9 @@ import userPhoto from '../../Assets/profile.png';
 
 const Sidebar = () => {
  
-    
-
-
   return (
     <>
+    <section>
     <div className="sidebar">
       <div className="profile-section">
         <div className="user-photo">
@@ -47,6 +45,7 @@ const Sidebar = () => {
         <h3>Logout</h3>
       </Link>
     </div>
+    </section>
     </>
   );
 };

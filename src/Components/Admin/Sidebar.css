@@ -69,7 +69,7 @@
   .menu-item:hover {
     background-color: #3107bc; /* Set your desired background color on hover */
     border: 1px #3107bc solid; /* Match the border color to the background color on hover */
-    width: 100%; /* Adjusted width for hover state */
+    width:300px; /* Adjusted width for hover state */
   }
   
   .menu-item svg {

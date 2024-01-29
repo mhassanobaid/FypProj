@@ -20,9 +20,10 @@ const  Home=() =>{
   ];
 
   return (
-    <main className='main-container'>
+    <>
+    <section>
      
-
+<div className='main-container'>
       <div className='main-cards'>
         <div className='card'>
           <div className='card-inner'>
@@ -104,7 +105,10 @@ const  Home=() =>{
           </LineChart>
         </ResponsiveContainer>
       </div>
-    </main>
+    
+    </div>
+    </section>
+    </>
   );
 }
 
