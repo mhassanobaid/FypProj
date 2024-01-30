@@ -29,7 +29,7 @@ Personalized Experiences: We don't believe in one-size-fits-all. Our tours are c
 
 Expert Guidance: Our seasoned guides and travel experts are dedicated to providing you with insightful information, local knowledge, and ensuring your safety throughout your journey.
 
-Unforgettable Destinations: From breathtaking landscapes to hidden gems off the beaten path, Adventure Ace takes you to destinations that captivate the soul and ignite the spirit of adventure.
+Unforgettable Destinations: From taking landscapes to hidden gems off the beaten path, Adventure Ace takes you to destinations that captivate the soul and ignite the spirit of adventure.
 <br /><b>Our Mission</b><br/>
 Adventure Ace Tour Management System is on a mission to inspire, connect, and empower individuals to explore the world. We aim to be your trusted partner in unlocking the wonders of the globe, fostering a deep appreciation for diverse cultures, nature, and the joy of travel.
 <br/><b>Join Us on the Adventure</b><br/>
