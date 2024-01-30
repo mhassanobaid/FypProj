@@ -1,0 +1,83 @@
+/* Sidebar.css */
+
+.sidebar {
+    width: 320px;
+    height: 200vh;
+    background-color:black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    
+  }
+  
+  
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .user-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  
+  .user-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .user-name {
+    font-size: 16px;
+  }
+  
+  .menu-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Adjusted to align items to the left */
+    width: 100%; /* Set the width to 100% to take full width */
+  }
+  
+  .menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border 0.3s ease; /* Add a smooth transition for background color and border change */
+    border: 1px transparent solid; /* Add a transparent border to compensate for layout changes */
+    width: 100%; /* Set width to 100% to take full width */
+  }
+  
+  .menu-item span {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .menu-item:hover span {
+    transform: translateX(100%); /* Slide the text to the right */
+  }
+  
+  .menu-item:hover {
+    background-color: #3107bc; /* Set your desired background color on hover */
+    border: 1px #3107bc solid; /* Match the border color to the background color on hover */
+    width: 100%; /* Adjusted width for hover state */
+  }
+  
+  .menu-item svg {
+    margin-right: 10px;
+    transition: margin-right 0.3s ease; /* Add a smooth transition for margin-right change */
+  }
+  
+  .menu-item:hover svg {
+    margin-right: 20px; /* Adjusted margin-right for hover state */
+  }
+  

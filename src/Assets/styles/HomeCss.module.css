@@ -1,0 +1,76 @@
+/* Updated CSS without hyphens */
+.searchBarOfApp {
+  margin-left: 500px;
+}
+
+.tourCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.packageText {
+  display: inline;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding-top: 40px;
+  text-decoration: underline;
+  text-decoration-color: yellowgreen;
+}
+
+.textDiv {
+  margin-top: 20px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.footerInMain {
+  /* Add styles as needed */
+}
+
+.mainInApp {
+  margin-bottom: 180px;
+}
+
+.reviewLanding {
+  flex: 0.4;
+  height: 300px;
+  background-color: wheat;
+  margin: 0 10px;
+}
+
+.reviewLandingLeft,
+.reviewLandingRight {
+  flex: 0.3;
+  height: 220px;
+  margin-top: 40px;
+}
+
+.reviewLandingOuter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.paraReview {
+  padding-top: 50px;
+}
+
+.h1InRv {
+  text-align: center;
+  font-family: comic sans ms;
+}
+
+.reviewLand {
+  height: 400px;
+  width: 100%;
+}

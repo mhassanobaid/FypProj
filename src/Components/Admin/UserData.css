@@ -1,0 +1,25 @@
+/* UserData.css */
+.userDataContainer {
+  padding: 20px;
+  text-align: center; /* Center align text in the container */
+  /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  margin-top: 30px;
+}
+
+.dataGridContainer {
+  height: 400px;
+  width: 1000px;
+ margin-left: 100px;
+}
+
+.actionsCell {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px; /* Add margin to create space between buttons and other content */
+  justify-content: center; /* Center align buttons within the container */
+}
+
+.actionsCell button {
+  min-width: auto; /* Allow button to adjust its width based on content */
+}
