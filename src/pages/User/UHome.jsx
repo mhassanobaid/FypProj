@@ -10,6 +10,7 @@ import Footer from "../../Components/Common/Footer";
 import SignUp from "../SignUpLogIn/SignUp";
 import UAbout from "./UAbout";
 import UContact from "./UContact";
+import AddLocationAltTwoToneIcon from '@mui/icons-material/AddLocationAltTwoTone';
 
 const UHome = () => {
   

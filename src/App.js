@@ -80,9 +80,9 @@ function App() {
             <Route path="/tour-company" element={<TCDataRoute />} />
             <Route path="/tours" element={<TourDataRoute />} />
             <Route path="/home" element={<UHome />} />
-        <Route path="/about" element={<UAbout />} />
-        <Route path="/contact" element={<UContact />} />
-        <Route path="/signup" element={<SignUp/>} />
+            <Route path="/about" element={<UAbout />} />
+           <Route path="/contact" element={<UContact />} />
+          <Route path="/signup" element={<SignUp/>} />
         </Routes>
       </BrowserRouter>
    

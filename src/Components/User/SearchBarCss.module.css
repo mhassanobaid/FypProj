@@ -9,22 +9,25 @@
 .buttonSearchBar
 {
   font-size: 18px;
-  padding: 3px;
-  border: 1px solid #000000;
+  padding: 10px;
+  border: 1px solid white;
   border-radius: 4px;
   background-color: #1172D4;
   color: white;
   font-weight: bold;
   margin-left: 30px;
-  margin-top: 11px;
-  height: 35px;
-  width: 80px;
+  margin-top: 2px;
+  
+  width: 90px;
 }
 .searchBarr
 {
-  display: flex;
-  align-items: center;
-  margin-left: 35px;
-  margin-bottom: 8px;
+  margin-left: 10px;
+  
+}
+.adornment {
+    
+}
+.inputField {
   
 }

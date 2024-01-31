@@ -10,9 +10,7 @@
 }
 
 .tourImage {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+
 }
 
 .tourDetails {
@@ -24,12 +22,17 @@
  
 }
 
-.tourDetails h,p {
-  margin-bottom: 8px;
+.tourDetails{
+ 
+  p{
   display: inline;
-  margin: 0px;
-  padding: 0px;
+  margin: 0.5px;
+  padding: 0.5px;}
+  h3{
+         margin-bottom: 3px;
+  }
 }
+
 .insideCardText{
   display: inline;
   font-weight: bold;
@@ -62,6 +65,19 @@
     font-weight: bold;
   } 
 }
-
+.insidecardtext
+{
+  display: inline;
+  
+  
+}
+.divInsideA
+{
+  img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+}
 
 

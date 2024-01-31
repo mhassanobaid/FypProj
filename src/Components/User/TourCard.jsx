@@ -13,9 +13,9 @@ const TourCard = ({ naam,image, location, price, tourists }) => {
       <div className={TCCss.tourDetails}>
         <h3>{naam}</h3>
         
-        <p><div class="inside-card-text">Location:</div><div className={TCCss.dataComingToCard}>{location}</div></p>
-        <p><div class="inside-card-text">Price $ &nbsp;&nbsp;:</div><div className={TCCss.dataComingToCard}>{price}</div></p>
-        <p><div class="inside-card-text">Tourists:&nbsp;</div><div className={TCCss.dataComingToCard}>{tourists}</div></p>
+        <p><div class={TCCss.insidecardtext}>Location:</div><div className={TCCss.dataComingToCard}>{location}</div></p>
+        <p><div class={TCCss.insidecardtext}>Price $ &nbsp;&nbsp;:</div><div className={TCCss.dataComingToCard}>{price}</div></p>
+        <p><div class={TCCss.insidecardtext}>Tourists:&nbsp;</div><div className={TCCss.dataComingToCard}>{tourists}</div></p>
       </div>
       </div>
       </a>
