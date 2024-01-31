@@ -33,7 +33,7 @@ Unforgettable Destinations: From taking landscapes to hidden gems off the beaten
 <br /><b>Our Mission</b><br/>
 Adventure Ace Tour Management System is on a mission to inspire, connect, and empower individuals to explore the world. We aim to be your trusted partner in unlocking the wonders of the fostering appreciation for diverse cultures, nature, and the joy of travel.
 <br/><b>Join Us on the Adventure</b><br/>
-Embark on a journey with Adventure Ace, where each step is a new discovery, and every moment is an opportunity for adventure. Let's create memories that transcend time and leave an indelible mark on your heart.
+Embark on a journey with Adventure Ace, where each step is a new discovery, and every moment is an opportunity for adventure. Let's create memories that transcend time and leave an mark on your heart.
 
 Thank you for choosing Adventure Ace Tour Management System – Your Gateway to Extraordinary Adventures!
 </pre>
