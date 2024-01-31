@@ -1,37 +1,38 @@
 /* TourCompany.css */
 
 .tourCompanyContainer {
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 0;
-    
-  }
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 0;
+  margin-right: 100px;
   
-  .tourCompanyContainer h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-    
-    
+}
 
-    /* Add the following styles to your CSS file */
+.tourCompanyContainer h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+  
+  
+
+  /* Add the following styles to your CSS file */
 
 .actoin_btns {
-  display: flex;
-  gap: 10px; /* Adjust the gap according to your preference */
+display: flex;
+gap: 10px; /* Adjust the gap according to your preference */
 }
 
 
 
 .action_btn_box Button {
-  width: 70px;
-  height: 40px; /* Adjust the height according to your preference */
+width: 70px;
+height: 40px; /* Adjust the height according to your preference */
 }
 
 .action_btn_box .viewButton {
-  background-color: blue;
+background-color: blue;
 }
 
 .action_btn_box .deleteButton {
-  background-color: red;
+background-color: red;
 }

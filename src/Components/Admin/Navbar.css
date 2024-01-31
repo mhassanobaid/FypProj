@@ -1,130 +1,93 @@
 
 
 .navbar {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #333; /* Set your desired background color */
-    color: white; /* Set your desired text color */
-    transition: background-color 0.3s ease; /* Add a smooth transition for background color change */
-    z-index:1;
-  }
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333; /* Set your desired background color */
+  color: white; /* Set your desired text color */
+  transition: background-color 0.3s ease; /* Add a smooth transition for background color change */
+  z-index:100;
   
-  .scrolled {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add box-shadow for a subtle effect */
-    background-color: #222; /* Set your desired background color when scrolled */
-  }
-  
-  
-  
-  .right-section {
-    flex: 1;
-    display: flex;
-    justify-content:flex-end;
-    margin-top: 30px;
-    height: 40px;
-  }
-  
-  
-  
-  .left-section
-  {
-    flex: 1;
-    display: flex;
-    justify-content:flex-start;
-    
-  }
-  .center-section {
-    flex: 2;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .logo
-  {
-    height: 60px; /* Set your desired height */
-    width: auto;
-    margin:0,10px; /* Adjust margin as needed */
-  }
+}
 
-  .notification_icon {
-    height: 30px; /* Set your desired height */
-    width: auto;
-    margin:0px; /* Adjust margin as needed */
-  }
-  
-  .search-bar {
-    padding: 10px;
-    font-size: 16px; /* Set your desired font size */
-    width: 70%; /* Take up full width of the container */
+.scrolled {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add box-shadow for a subtle effect */
+  background-color: #222; /* Set your desired background color when scrolled */
+}
 
-  }
 
-  .search-button {
-    padding: 8px 12px;
-    font-size: 16px;
-    background-color: #007bff; /* Set your desired button background color */
-    color: white; /* Set your desired button text color */
-    border: none;
-    cursor: pointer;
-  }
-  
-  .search-button:hover {
-    background-color: #0056b3; /* Set your desired button background color on hover */
-  }
-  .logout
+
+.right-section {
+  flex: 1;
+  display: flex;
+  justify-content:flex-end;
+  margin-top: 30px;
+  margin-right: 20px;
+  height: 40px; 
+}
+
+
+.left-section
 {
-padding-right: 50px;
+  flex: 1;
+  display: flex;
+  justify-content:flex-start;
+  
+}
+
+.center-section {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.logo
+{
+  height: 60px; /* Set your desired height */
+  width: auto;
+  margin:0,10px; /* Adjust margin as needed */
+}
+
+.notification_icon {
+  height: 30px; /* Set your desired height */
+  width: auto;
+  margin:0, 10px; 
+}
+
+.admin_search-bar {
+  padding: 10px;
+  font-size: 16px; /* Set your desired font size */
+  width: 70%; /* Take up full width of the container */
 
 }
+
+.search-button {
+  padding: 8px 12px;
+  font-size: 16px;
+  background-color: #007bff; /* Set your desired button background color */
+  color: white; /* Set your desired button text color */
+  border: none;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3; /* Set your desired button background color on hover */
+}
+
 /* Navbar.css */
 
 /* ... existing styles ... */
 
 .profile-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 20px; /* Adjust margin as needed */
-  }
-  
-  .user-photo {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #ddd; /* Placeholder background color */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #555; /* Placeholder text color */
-    margin-bottom: 5px;
-  }
-  
-  .user-name {
-    font-size: 12px;
-    color: #aaa; /* User name color */
-  }
-  
-  /* ... existing styles ... */
-  /* Navbar.css */
-
-/* ... existing styles ... */
-
-.row-container {
-    display: flex;
-  }
-  .compos
-  {
-    flex: 1;
-  /* Add margin as needed */
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px; /* Adjust margin as needed */
+}
 
 
-  }
-  

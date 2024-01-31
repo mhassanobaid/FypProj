@@ -33,7 +33,7 @@
   }
 }
 
-.insideCardText{
+.insidecardtext{
   display: inline;
   font-weight: bold;
 }
@@ -41,7 +41,7 @@
 {
   display: inline;
  margin-left: 10px;
- font-weight: lighter;
+ font-weight: normal;
 }
 /* Add more styling as needed */
 .tourCard a

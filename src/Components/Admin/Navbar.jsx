@@ -2,14 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
-import mylogo from '../../Assets/images/logo.png';
+import mylogo from '../../Assets/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import Sidebar from './Sidebar';
-import DashboardCards from './DashboardCards';
 
-import Home from './Home';
-import UserData from './UserData';
+
 
 const Navbar = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -40,6 +37,7 @@ const Navbar = () => {
 
   return (
     <>
+    <section>
       <div className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="left-section">
           <img src={mylogo} alt="Logo" className="logo" />
@@ -58,7 +56,7 @@ const Navbar = () => {
             placeholder="Search..."
             value={searchInput}
             onChange={handleSearchChange}
-            className="search-bar"
+            className="admin_search-bar"
           />
           <button className="search-button">Search</button>
         </div>
@@ -67,17 +65,8 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faEnvelope} className='notification_icon' />
         </div>
       </div>
-      <div className="row-container">
-      <div className='compos'>
-      {/* <Sidebar /> */}
-      </div>
-      <div className='compos'>
-      {/* <DashboardCards /> */}
-      {/* <Home/>
-      <UserData/> */}
-      {/* <User/> */}
-      </div>
-      </div>
+      
+      </section>
     </>
   );
 };

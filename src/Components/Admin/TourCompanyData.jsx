@@ -73,6 +73,8 @@ const TourCompanyData = () => {
   };
 
   return (
+    <>
+    <section>
     <div className="tourCompanyContainer">
       <h2>Tour Companies</h2>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -173,6 +175,8 @@ const TourCompanyData = () => {
         />
       </Paper>
     </div>
+    </section>
+    </>
   );
 };
 

@@ -95,6 +95,8 @@ useEffect(() => {
   ];
 
   return (
+    <>
+    <section>
     <div className="userDataContainer">
       <h2>UserData</h2>
       <Box className="dataGridContainer">
@@ -107,6 +109,8 @@ useEffect(() => {
         />
       </Box>
     </div>
+    </section>
+    </>
   );
 };
 

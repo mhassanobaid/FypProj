@@ -1,15 +1,22 @@
 import './App.css';
 
+
+
+
 import Main from './Components/Admin/Main';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from './pages/admin/Dashboard';
 import UserDataRoute from './pages/admin/UserDataRoute';
 import TCDataRoute from './pages/admin/TCDataRoute';
 import TourDataRoute from './pages/admin/TourDataRouter';
+
 import SignUp from './pages/SignUpLogIn/SignUp';
 import UHome from './pages/User/UHome';
 import UAbout from './pages/User/UAbout';
 import UContact from './pages/User/UContact';
+
+
+import Navbar from './Components/Admin/Navbar';
 
 
 
@@ -70,26 +77,22 @@ function App() {
     ];
    
 
-  return (
-    <div className="App">
-
-      <BrowserRouter>
-        <Routes>
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/user" element={<UserDataRoute />} />
             <Route path="/tour-company" element={<TCDataRoute />} />
             <Route path="/tours" element={<TourDataRoute />} />
             <Route path="/home" element={<UHome />} />
             <Route path="/about" element={<UAbout />} />
-           <Route path="/contact" element={<UContact />} />
-          <Route path="/signup" element={<SignUp/>} />
-        </Routes>
-      </BrowserRouter>
-   
-   </div>
-
-   
-  );
-}
-
-export default App;
+            <Route path="/contact" element={<UContact />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    );
+  }
+  
+  export default App;
