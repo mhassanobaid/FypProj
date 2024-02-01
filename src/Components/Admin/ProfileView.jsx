@@ -1,51 +1,58 @@
 // ProfileView.js
 
-import React from 'react';
+import React, { useState } from 'react';
 import './ProfileView.css'; // Make sure to import your stylesheet
 import userPhoto from '../../Assets/profile.png';
+import zub from '../../Assets/zub.jpg'
+
 
 const ProfileView = () => {
+  const [profilePicture, setProfilePicture] = useState(null);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+
+    // Perform additional checks if needed
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        setProfilePicture(reader.result);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <section>
       <div className='main-profile-section'>
-        {/* <div className="user-profile-section">
-          <div className="user-profile-photo">
-            <img src={userPhoto} alt="User" />
-          </div>
-          <div className="user-name">Rana Zubair</div>
-        </div> */}
         <div className='dp-card'>
-
-        <img src={userPhoto} alt="John" style={{width:"100%"}}/>
-  <h1>Zubair</h1>
-  <p className="dp-title">CEO & Founder, Example</p>
-  <p>Harvard University</p>
-  <p><button className='dp-button'>Contact</button></p>
-
+          <input
+            type='file'
+            accept='image/*'
+            onChange={handleImageChange}
+            style={{ display: 'none' }}
+            id='uploadProfilePicture'
+          />
+          <label htmlFor='uploadProfilePicture'>
+            <img
+              src={zub} // Provide a default image URL
+              alt='User'
+              className='user-profile-photo'
+            />
+          </label>
+          <h1>Zubair</h1>
+          <h3>mzubair645@gmail.com</h3>
+          <h3>03044585007</h3>
+          <p className='dp-title'>CEO & Founder, Example</p>
+          <p>
+            <button className='dp-button'>Contact</button>
+          </p>
         </div>
         <div className='user_profile_form-section'>
           <form>
-            <div className="form-column">
-              <label htmlFor="firstName">First Name:</label>
-              <input type="text" id="firstName" name="firstName" />
-            </div>
-
-            <div className="form-column">
-              <label htmlFor="lastName">Last Name:</label>
-              <input type="text" id="lastName" name="lastName" />
-            </div>
-
-            <div className="form-column">
-              <label htmlFor="email">Email:</label>
-              <input type="email" id="email" name="email" />
-            </div>
-
-            <div className="form-column">
-              <label htmlFor="contact">Contact:</label>
-              <input type="text" id="contact" name="contact" />
-            </div>
-
-            {/* Add more form fields as needed */}
+            {/* Add other form fields */}
           </form>
         </div>
       </div>

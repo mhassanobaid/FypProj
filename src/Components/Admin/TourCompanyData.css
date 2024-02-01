@@ -4,7 +4,7 @@
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 0;
-    margin-right: 100px;
+    
     
   }
   
@@ -29,10 +29,10 @@
   height: 40px; /* Adjust the height according to your preference */
 }
 
-.action_btn_box .viewButton {
-  background-color: blue;
+.action_btn_box .editButton:hover {
+  
 }
 
 .action_btn_box .deleteButton {
-  background-color: red;
+  
 }

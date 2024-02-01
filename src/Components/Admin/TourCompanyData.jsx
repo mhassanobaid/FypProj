@@ -10,6 +10,9 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import './TourCompanyData.css';
 
 const columns = [
@@ -126,24 +129,22 @@ const TourCompanyData = () => {
                           return (
                             <div key={column.id} align={column.align} className='actoin_btns'>
   <div className='action_btn_box'>
-    <Button
-      className='viewButton' // Add this class for the blue color
-      variant="contained"
-      color="primary"
-      onClick={() => handleViewClick(row.id)}
-    >
-      View
-    </Button>
+    <IconButton
+                                    className='editButton' // Add this class for the blue color
+                                    color="primary"
+                                    onClick={() => handleViewClick(row.id)}
+                                  >
+                                    <EditIcon />
+                                  </IconButton>
   </div>
   <div className='action_btn_box'>
-    <Button
-      className='deleteButton' // Add this class for the red color
-      variant="contained"
-      color="secondary"
-      onClick={() => handleDeleteClick(row.id)}
-    >
-      Delete
-    </Button>
+    <IconButton
+          className='deleteButton' // Add this class for the red color
+          color="secondary"
+          onClick={() => handleDeleteClick(row.id)}
+        >
+    <DeleteIcon />
+  </IconButton>
   </div>
 </div>
 
