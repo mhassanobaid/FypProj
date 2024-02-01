@@ -1,4 +1,8 @@
 import './App.css';
+
+
+
+
 import Main from './Components/Admin/Main';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from './pages/admin/Dashboard';
@@ -6,16 +10,15 @@ import UserDataRoute from './pages/admin/UserDataRoute';
 import TCDataRoute from './pages/admin/TCDataRoute';
 import TourDataRoute from './pages/admin/TourDataRouter';
 
+import SignUp from './pages/SignUpLogIn/SignUp';
+import UHome from './pages/User/UHome';
+import UAbout from './pages/User/UAbout';
+import UContact from './pages/User/UContact';
 
-import SignUpForm from './Components/Admin/SignUpForm';
-import Footer from './Components/LandingPage/headerFooterComp/Footer';
-import Header from './Components/LandingPage/headerFooterComp/Header';
-import SearchBar from './Components/LandingPage/SearchBar';
-import TourCard from './Components/LandingPage/TourCard';
-import ReviewSlider from './Components/LandingPage/ReviewSlider';
 
 import Navbar from './Components/Admin/Navbar';
-//import SignUpForm from './Components/Admin/Navbar';
+
+
 
 function App() {
 
@@ -74,57 +77,22 @@ function App() {
     ];
    
 
-  return (
-    <>
-    <div className="App">
-
-       <BrowserRouter>
-        <Routes>
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/user" element={<UserDataRoute />} />
             <Route path="/tour-company" element={<TCDataRoute />} />
             <Route path="/tours" element={<TourDataRoute />} />
-
-        </Routes>
-      </BrowserRouter>
-      
-        
-           
-            <main className='main-in-app'>
-              <div className='text-div'><h4 className='package-text'>Packages</h4></div>
-            <div className="tour-card-container"> 
-            {/* {tours.map((tour) => (
-            <TourCard
-              key={tour.id}
-              naam = {tour.naam}
-              image={tour.image}
-              location={tour.location}
-              price={tour.price}
-              tourists={tour.tourists}
-            />
-              ))}
-       */}
-          </div>
-        
-            <section className='review-land' id='rv-land'>
-              <h3 className='h1-in-rv'>What Users say about us</h3>
-            
-                {/* <ReviewSlider/> */}
-
-
-            </section>
-            
-            </main>
-            {/* <Footer className="footer-in-main"/> */}
-            
-            
-
-
-
-
-    </div>
-    </>
-  );
-}
-
-export default App;
+            <Route path="/home" element={<UHome />} />
+            <Route path="/about" element={<UAbout />} />
+            <Route path="/contact" element={<UContact />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    );
+  }
+  
+  export default App;

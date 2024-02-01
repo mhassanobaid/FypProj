@@ -1,0 +1,36 @@
+.contactDetails
+{
+  margin-top: 12px;
+     
+     padding-left: 10px;
+     h2{
+      text-align: center;
+     }
+     p{
+      font-weight:500;
+      display: block;
+      margin-top: 15px;
+     }
+     h4
+     {
+      display: inline;
+      font-size: 20px;
+      margin-left: 0px;
+      margin-top: 100px;
+      padding-top: 50px;
+      text-decoration: underline;
+      text-decoration-color: #1172D4;
+      
+     }
+     .insideContact
+     {
+      text-align: center;
+      min-height: 30vh;
+      margin-top: 50px;
+     }
+     .txtInCont
+     {
+      font-weight: bold;
+      display: inline;
+     }
+}
