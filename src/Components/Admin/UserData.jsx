@@ -3,6 +3,9 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import './UserData.css';
 
 const UserData = () => {
@@ -17,6 +20,16 @@ const UserData = () => {
     // Implement your delete logic here
     console.log('Delete user ID:', userId);
   };
+  const handleViewClick = (companyId) => {
+    // Placeholder function for view action
+    console.log(`View clicked for company with ID: ${companyId}`);
+  };
+
+  const handleDeleteClick = (companyId) => {
+    // Placeholder function for delete action
+    console.log(`Delete clicked for company with ID: ${companyId}`);
+  };
+
 
 //   useEffect(() => {
 //     // Fetch user data from your API
@@ -70,24 +83,20 @@ useEffect(() => {
       width: 150,
       renderCell: (params) => (
         <div className="actionsCell">
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={() => handleDetail(params.row.id)}
-          >
-            Detail
-          </Button>
-          
-          <Button
-            variant="contained"
-            color="error"
-            size="small"
-            className='delbtn'
-            onClick={() => handleDelete(params.row.id)}
-          >
-            Delete
-          </Button>
+          <IconButton
+                                    className='editButton' // Add this class for the blue color
+                                    color="primary"
+                                    onClick={() => handleViewClick("")}
+                                  >
+                                    <EditIcon />
+                                  </IconButton>
+          <IconButton
+          className='deleteButton' // Add this class for the red color
+          color="secondary"
+          onClick={() => handleDeleteClick("")}
+        >
+    <DeleteIcon />
+  </IconButton>
           
         </div>
       ),

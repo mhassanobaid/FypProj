@@ -13,34 +13,34 @@ const Sidebar = () => {
   return (
     <>
     <section>
-    <div className="sidebar">
-      <div className="profile-section">
-        <div className="user-photo">
+    <div className="ssidebar">
+      <div className="sprofile-section">
+        <div className="suser-photo">
           <img src={userPhoto} alt="User" />
         </div>
-        <div className="user-name">Rana Zubair</div>
+        <div className="suser-name">Rana Zubair</div>
       </div>
       
-      <div className="menu-section">
-        <Link to="/" className="menu-item">
+      <div className="smenu-section">
+        <Link to="/" className="smenu-item">
           <FontAwesomeIcon icon={faChartBar} />
           Dashboard
         </Link>
-        <Link to="/tour-company" className="menu-item">
+        <Link to="/tour-company" className="smenu-item">
           <FontAwesomeIcon icon={faBuilding} />
           Tour Company
         </Link>
-        <Link to="/tours" className="menu-item">
+        <Link to="/tours" className="smenu-item">
           <FontAwesomeIcon icon={faGlobe} />
           Tours
         </Link>
-        <Link to="/user" className="menu-item">
+        <Link to="/user" className="smenu-item">
           <FontAwesomeIcon icon={faUserFriends} />
           User
         </Link>
       </div>
       
-      <Link to="/logout" className="menu-item">
+      <Link to="/logout" className="smenu-item">
         <FontAwesomeIcon icon={faSignOutAlt} />
         <h3>Logout</h3>
       </Link>
