@@ -1,9 +1,11 @@
+
 import React from 'react'
 import Navbar from '../../Components/Admin/Navbar'
 import Sidebar from '../../Components/Admin/Sidebar'
 import TourData from '../../Components/Admin/ToursData'
+import ProfileView from '../../Components/Admin/ProfileView'
 
-const TourDataRoute = () => {
+const TourDataRouter = () => {
   return (
     <>
     <div>
@@ -11,7 +13,13 @@ const TourDataRoute = () => {
       </div>
       <div className="row-container">
           <Sidebar />
+          <div>
+          <ProfileView/>
+         
+          <div>
          <TourData/>
+         </div>
+         </div>
         </div>
       
 
@@ -19,4 +27,4 @@ const TourDataRoute = () => {
   )
 }
 
-export default TourDataRoute
+export default TourDataRouter

@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import './ProfileView.css'; // Make sure to import your stylesheet
 import userPhoto from '../../Assets/profile.png';
-import zub from '../../Assets/zub.jpg'
-
+import zub from '../../Assets/zub.jpg';
+import hamza2 from '../../Assets/hamza2.jpeg';
+import UserChar from './UserChar';
 
 const ProfileView = () => {
   const [profilePicture, setProfilePicture] = useState(null);
@@ -24,6 +25,8 @@ const ProfileView = () => {
     }
   };
 
+  // Mock data for UserBookingChart (replace with actual data)
+ 
   return (
     <section>
       <div className='main-profile-section'>
@@ -37,7 +40,7 @@ const ProfileView = () => {
           />
           <label htmlFor='uploadProfilePicture'>
             <img
-              src={zub} // Provide a default image URL
+              src={hamza2} // Provide a default image URL
               alt='User'
               className='user-profile-photo'
             />
@@ -51,9 +54,7 @@ const ProfileView = () => {
           </p>
         </div>
         <div className='user_profile_form-section'>
-          <form>
-            {/* Add other form fields */}
-          </form>
+          <UserChar/>
         </div>
       </div>
     </section>
