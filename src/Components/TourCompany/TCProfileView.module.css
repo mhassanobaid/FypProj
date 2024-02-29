@@ -1,5 +1,5 @@
 /* styles.css or your preferred stylesheet */
-.pmain-profile-section
+.pmain_profile_section
 {
 display: flex;
 flex-direction: row;
@@ -19,7 +19,7 @@ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
 }
 
-.puser-profile-section {
+.puser_profile_section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +28,7 @@ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   
 }
 
-.puser-profile-photo {
+.puser_profile_photo {
   width: 300px;
   height: 300px;
   border-radius: 50%;
@@ -47,7 +47,7 @@ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   
   
   /* Add more styling for the form elements as needed */
-  .pdp-card {
+  .pdp_card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
     font-family: arial;
@@ -56,12 +56,12 @@ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     
   }
   
-  .pdp-title {
+  .pdp_title {
     color: grey;
     font-size: 18px;
   }
   
-  .pdp-button {
+  .pdp_button {
     border: none;
     outline: 0;
     display: inline-block;
@@ -77,6 +77,6 @@ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   
   
   
-  .pdp-button:hover{
+  .pdp_button:hover{
     opacity: 0.7;
   }

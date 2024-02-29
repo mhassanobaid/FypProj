@@ -1,11 +1,11 @@
 // ProfileView.js
 
 import React, { useState } from 'react';
-import './ProfileView.css'; // Make sure to import your stylesheet
+import p from'./TCProfileView.module.css'; // Make sure to import your stylesheet
 import userPhoto from '../../Assets/profile.png';
 import zub from '../../Assets/zub.jpg';
 import hamza2 from '../../Assets/hamza2.jpeg';
-import UserChar from './UserChar';
+import TCUserChar from './TCUserChar';
 
 const ProfileView = () => {
   const [profilePicture, setProfilePicture] = useState(null);
@@ -29,26 +29,26 @@ const ProfileView = () => {
  
   return (
     <section>
-      <div className='pmain-profile-section'>
-        <div className='pdp-card'>
+      <div className={p.pmain_profile_section}>
+        <div className={p.pdp_card}>
         
           <label htmlFor='puploadProfilePicture'>
             <img
               src={hamza2} // Provide a default image URL
               alt='User'
-              className='puser-profile-photo'
+              className={p.puser_profile_photo}
             />
           </label>
           <h1>Zubair</h1>
           <h3>mzubair645@gmail.com</h3>
           <h3>03044585007</h3>
-          <p className='pdp-title'>CEO & Founder, Example</p>
+          <p className={p.pdp_title}>CEO & Founder, Example</p>
           <p>
-            <button className='pdp-button'>Contact</button>
+            <button className={p.pdp_button}>Contact</button>
           </p>
         </div>
-        <div className='puser_profile_form-section'>
-          <UserChar/>
+        <div className={p.puser_profile_form_section}>
+          <TCUserChar/>
         </div>
       </div>
     </section>

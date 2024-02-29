@@ -1,0 +1,30 @@
+/* DashboardCards.css */
+
+.dashboard_cards {
+  display: flex;
+  justify-content:right;
+ 
+ 
+}
+
+.card {
+  width: 400px; /* Adjust the width as needed */
+  background-color: #3dce09; /* Set your desired background color */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add box-shadow for a subtle effect */
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  font-size: 18px; /* Set your desired font size for counts */
+  font-weight: bold;
+}

@@ -20,6 +20,13 @@ import Navbar from './Components/Admin/Navbar';
 
 
 
+
+//TourCompany ROuters
+import TCDashboardp from './pages/TourCompany/TCDashboardp'
+import TCUserDataRoute from './pages/TourCompany/TCUserDataRoute';
+import  TCTCDataRoute from './pages/TourCompany/TCTCDataRoute'
+import TCTourDataRoute from './pages/TourCompany/TCTourDataRouter';
+
 function App() {
 
   
@@ -79,16 +86,23 @@ function App() {
 
     return (
       <div className="App">
-        <BrowserRouter>
+        {/* <BrowserRouter>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/user" element={<UserDataRoute />} />
             <Route path="/tour-company" element={<TCDataRoute />} />
             <Route path="/tours" element={<TourDataRoute />} />
-            {/* <Route path="/home" element={<UHome />} />
-            <Route path="/about" element={<UAbout />} />
-            <Route path="/contact" element={<UContact />} />
-            <Route path="/signup" element={<SignUp />} /> */}
+            
+          </Routes>
+        </BrowserRouter> */}
+
+<BrowserRouter>
+          <Routes>
+            <Route path="/" element={<TCDashboardp />} />
+            <Route path="/user" element={<TCUserDataRoute />} />
+            <Route path="/tour-company" element={<TCTCDataRoute />} />
+            <Route path="/tours" element={<TCTourDataRoute />} />
+            
           </Routes>
         </BrowserRouter>
       </div>
