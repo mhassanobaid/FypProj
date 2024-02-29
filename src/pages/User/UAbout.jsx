@@ -2,7 +2,7 @@
 import React, { Fragment,useState } from 'react';
 
 import ACss from '../../Assets/styles/AboutCss.module.css'
-
+import HeaderWTC from '../../Components/Common/HeaderWTC';
 
 
 const UAbout = ({fromSignUp,customProp}) => {
@@ -19,7 +19,7 @@ const UAbout = ({fromSignUp,customProp}) => {
     <Fragment>
          
        
-          
+         <HeaderWTC/>
       <div className={ACss.aboutDetails}>
         <h4>About us</h4>
         <div className={ACss.insideAbout}>

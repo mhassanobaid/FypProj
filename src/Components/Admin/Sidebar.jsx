@@ -5,7 +5,7 @@ import './Sidebar.css';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartBar, faBuilding, faGlobe, faUserFriends, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Import necessary icons
-import userPhoto from '../../Assets/profile.png';
+import userPhoto from '../../Assets/images/profile.png';
 
 
 const Sidebar = () => {

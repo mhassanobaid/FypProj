@@ -18,13 +18,28 @@ const SearchBar = ({ onSearch }) => {
     // Pass the search criteria to the parent component
     onSearch({ location, money, tourists });
   };
+const setTourist=(ev)=>{
+  let value = parseInt(ev.target.value);
+  if (isNaN(value)) {
+    value = 0;
+  }
 
+  // Enforce minimum value of 1
+  if (value < 1) {
+    value = 1;
+  }
+  setTourists(value);
+
+
+
+}
   return (
     <div className={SBCss.searchBarr}>
     <TextField
       label="Where to"
       placeholder="Where to"
       value={location}
+      
       onChange={(e) => setLocation(e.target.value)}
       
       InputProps={{
@@ -57,7 +72,7 @@ const SearchBar = ({ onSearch }) => {
       placeholder="Tourists"
       type="number"
       value={tourists}
-      onChange={(e) => setTourists(e.target.value)}
+      onChange={setTourist}
       className={SBCss.inputField}
       InputProps={{
         startAdornment: (

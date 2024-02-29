@@ -1,5 +1,5 @@
 // Home.js
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Header from "../../Components/Common/Header";
 import TourCard from "../../Components/User/TourCard";
 import ReviewSlider from "../../Components/User/ReviewSlider";
@@ -7,17 +7,35 @@ import HCss from '../../Assets/styles/HomeCss.module.css'
 
 import Footer from "../../Components/Common/Footer";
 
+
 import SignUp from "../SignUpLogIn/SignUp";
 import UAbout from "./UAbout";
+import { useLocation, useParams } from 'react-router-dom';
 import UContact from "./UContact";
-import AddLocationAltTwoToneIcon from '@mui/icons-material/AddLocationAltTwoTone';
+import {useNavigate} from 'react-router-dom';
+import { useUser } from '../../Components/User/UserContext';
+
+
 
 const UHome = () => {
   
   const [currentView, setCurrentView] = useState("tours");
   const [showSearchBar, setShowSearchBar] = useState(true);
   const [showHeader, setShowHeader] = useState(true);
+  let [userAuthenticated, setUserAuthenticated] = useState(false);  
+  const { user, updateUser } = useUser();
+  const UseName = user ? user.username : 'Welcome User';
+   userAuthenticated = user? true:false;
 
+// const loc = useLocation();
+// var userNam = loc.state?.userName ?? 'Welcome User';
+// useEffect(() => {
+//   setUserAuthenticated(loc.state?.userAuthenticated ?? false);
+// }, [loc.state?.userAuthenticated]);
+
+
+    const navigate = useNavigate();
+      
   const handleContactClick = () => {
     setCurrentView("contactDetails");
     setShowSearchBar(false);
@@ -50,53 +68,67 @@ const UHome = () => {
       id: 1,
       naam: "NathiaGali Expendition",
       image: "/images/murree.jpg",
-      location: "NathiaGali",
+      location: "NathiaGali KPK",
       price: 99,
       tourists: 20,
+      departureDate: "2024-03-15", // Example departure date
+      description: "Explore the beautiful hills of NathiaGali on this adventurous expedition.", // Description of the tour
     },
     {
       id: 2,
       naam: "Murree Journey",
       image: "/images/kalarkahaar.jpg",
-      location: "Murree Expedition",
+      location: "Murree RWP",
       price: 149,
-      tourists: 15,
+      tourists: 16,
+      departureDate: "2024-01-17", // Example departure date
+      description: "Explore the beautiful hills of Murree on this adventurous expedition.", // Description of the tour
     },
     {
       id: 3,
       naam: "KalarKahaar Journey",
       image: "/images/nathiagali.jpg",
-      location: "KalrKahar Expedition",
+      location: "KalrKahar ISL",
       price: 149,
       tourists: 15,
+      departureDate: "2024-05-19", // Example departure date
+      description: "Explore the beautiful hills of KalarKahaar on this adventurous expedition.", // Description of the tour
     },
     {
       id: 4,
-      naam: "KalarKahaar Journey",
+      naam: "Kohaat Journey",
       image: "/images/neelumValley.jpg",
-      location: "KalrKahar Expedition",
+      location: "Kohaat KPK",
       price: 149,
       tourists: 15,
+      departureDate: "2024-05-20", // Example departure date
+      description: "Explore the beautiful hills of Kohaat on this adventurous expedition.", // Description of the tour
     },
     {
       id: 5,
-      naam: "KalarKahaar Journey",
+      naam: "Bhurban Journey",
       image: "/images/swatValley.jpg",
-      location: "KalrKahar Expedition",
+      location: "Murree",
       price: 149,
       tourists: 15,
+      departureDate: "2024-05-21", // Example departure date
+      description: "Explore the beautiful hills of Bhurban on this adventurous expedition.", // Description of the tour
     },
     {
       id: 6,
-      naam: "KalarKahaar Journey",
+      naam: "Swat Journey",
       image: "/images/nelumValley.jpg",
-      location: "KalrKahar Expedition",
+      location: "Swat",
       price: 149,
       tourists: 15,
+      departureDate: "2024-06-15", // Example departure date
+      description: "Explore the beautiful hills of Swat on this adventurous expedition.", // Description of the tour
     },
 
     // Add more tours as needed
   ];
+
+ 
 
   return (
     <div className={HCss.app}>
@@ -110,6 +142,9 @@ const UHome = () => {
             onAboutClick={handleAboutClick}
             onSignUpClick={handleSignUpClick}
             showSearchBar={showSearchBar}
+            userNamee = {UseName}
+            authenticated={userAuthenticated}
+            
           />
         </>
       ) : (
@@ -134,6 +169,10 @@ const UHome = () => {
                   location={tour.location}
                   price={tour.price}
                   tourists={tour.tourists}
+                  tourss = {tours}
+                  tId = {tour.id}
+                  departureDate = {tour.departureDate}
+                  description = {tour.description}
                 />
               ))}
             </div>

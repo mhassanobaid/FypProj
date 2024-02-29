@@ -57,7 +57,7 @@ nav a {
   background-color: white; */
 
    position: absolute;
-  top: 60%; /* Adjust the top position */
+  top: 65%; /* Adjust the top position */
   left: 50%; /* Center the search bar horizontally */
   transform: translateX(-50%); /* Center the search bar horizontally */
   color: white;

@@ -1,0 +1,40 @@
+.dvv a:hover {
+  color: #005050;
+  .insiDv {
+    
+    box-shadow: 10 10 10px rgba(0, 0, 0, 0.3);
+  }
+  .tct {
+    color: rgb(0, 126, 0);
+    font-weight: bold;
+  }
+}
+.insiDv {
+  
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+  margin-right: 20px; /* Add spacing between tour cards */
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+.tct {
+  display: inline;
+
+}
+.tcts{
+  display: inline;
+  font-weight: bold;
+}
+.noFavorites
+{
+  height: 300px;
+  width:300px;
+  border: 1px solid rgb(108, 108, 108);
+  background-color: antiquewhite;
+  margin-left: 350px;
+  p{
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+}

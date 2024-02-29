@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import './ProfileView.css'; // Make sure to import your stylesheet
-import userPhoto from '../../Assets/profile.png';
-import zub from '../../Assets/zub.jpg';
-import hamza2 from '../../Assets/hamza2.jpeg';
+import userPhoto from '../../Assets/images/profile.png';
+import zub from '../../Assets/images/zub.jpg';
+import hamza2 from '../../Assets/images/hamza2.jpeg';
 import UserChar from './UserChar';
 
 const ProfileView = () => {
