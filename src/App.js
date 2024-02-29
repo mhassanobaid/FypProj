@@ -100,7 +100,7 @@ function App() {
           <Routes>
             <Route path="/" element={<TCDashboardp />} />
             <Route path="/user" element={<TCUserDataRoute />} />
-            <Route path="/tour-company" element={<TCTCDataRoute />} />
+            <Route path="/add-tours" element={<TCTCDataRoute />} />
             <Route path="/tours" element={<TCTourDataRoute />} />
             
           </Routes>

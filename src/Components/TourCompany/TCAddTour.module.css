@@ -1,0 +1,93 @@
+/* TCAddTour.module.css */
+
+.main_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; /* Add box shadow */
+    width: 1180px;
+    margin-left: 10px;
+    margin-top: 5px;
+    background-color: #a5b9cf;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px; /* Add margin to separate title from form */
+  }
+  
+  .signup_section {
+    width: 800px; /* Make sure the form spans the entire width */
+    display: flex;
+    justify-content: center; /* Center the form horizontally */
+    
+    
+  }
+  
+  .signup_form {
+    max-width: 600px;
+    width: 100%; /* Ensure the form takes up the full width */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form_row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    
+  }
+  
+  .form_group {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .form_group:last-child {
+    margin-right: 0;
+  }
+  
+  .form_group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form_group input {
+    width: calc(50% - 5px); /* Set width for input fields with space between them */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    
+  }
+  
+  .form_group button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for hover effect */
+  }
+  
+  .form_group button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Additional styling for input fields */
+  .form_group input[type="text"],
+  .form_group input[type="email"],
+  .form_group input[type="password"],
+  .form_group input[type="tel"] {
+    width: 100%; /* Set width to 100% */
+  }
+  
+  /* Optional: Add margin-bottom to form groups for spacing */
+  .form_group {
+    margin-bottom: 15px;
+  }
+  

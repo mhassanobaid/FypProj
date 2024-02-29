@@ -10,7 +10,7 @@ import userPhoto from '../../Assets/profile.png';
 
 const TCSidebar = () => {
  
-  return (
+  return ( 
     <>
     <section>
     <div className={s.ssidebar}>
@@ -31,11 +31,11 @@ const TCSidebar = () => {
           <FontAwesomeIcon icon={faGlobe} />
           Tours
         </Link>
-        <Link to="/tours" className={s.smenu_item}>
+        <Link to="/add-tours" className={s.smenu_item}>
           <FontAwesomeIcon icon={faGlobe} />
           Add Tours
         </Link>
-        <Link to="/tours" className={s.smenu_item}>
+        <Link to="/update-tours" className={s.smenu_item}>
           <FontAwesomeIcon icon={faGlobe} />
           Update Tour
         </Link>
