@@ -29,25 +29,31 @@ const ProfileView = () => {
  
   return (
     <section>
-      <div className='pmain-profile-section'>
-        <div className='pdp-card'>
-        
-          <label htmlFor='puploadProfilePicture'>
+      <div className='main-profile-section'>
+        <div className='dp-card'>
+          <input
+            type='file'
+            accept='image/*'
+            onChange={handleImageChange}
+            style={{ display: 'none' }}
+            id='uploadProfilePicture'
+          />
+          <label htmlFor='uploadProfilePicture'>
             <img
               src={hamza2} // Provide a default image URL
               alt='User'
-              className='puser-profile-photo'
+              className='user-profile-photo'
             />
           </label>
           <h1>Zubair</h1>
           <h3>mzubair645@gmail.com</h3>
           <h3>03044585007</h3>
-          <p className='pdp-title'>CEO & Founder, Example</p>
+          <p className='dp-title'>CEO & Founder, Example</p>
           <p>
-            <button className='pdp-button'>Contact</button>
+            <button className='dp-button'>Contact</button>
           </p>
         </div>
-        <div className='puser_profile_form-section'>
+        <div className='user_profile_form-section'>
           <UserChar/>
         </div>
       </div>
