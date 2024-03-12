@@ -97,9 +97,9 @@ margin: 0;
 export const Input = styled.input`
 background-color: #eee;
 border: none;
-padding: 12px 15px;
+ padding: ${props => props.paddingTB ? `${props.paddingTB}px` : '12px'} ${props => props.paddingLR ? `${props.paddingLR}px` : '15px'};
 margin: 8px 0;
-width: 100%;
+width: ${props=>props.wid?`${props.wid}px`:'100%'};
 `;
 
 export const TourDetailDv = styled.div`

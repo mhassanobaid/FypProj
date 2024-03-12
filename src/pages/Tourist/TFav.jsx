@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useUser } from '../../Components/User/UserContext';
 import { TourCardd,TourCardContainerr,HDef,TourDetailDv,OuterTourDet,TourDetImg,TourDetLogo,Button,SlideShowContainer,TourCompanyInfo,Roomicon,Roomicon1,BookingDet } from '../../Components/Common/Components';
 import { useNavigate,useLocation } from 'react-router-dom';
@@ -22,10 +22,10 @@ const TFav = ()=>{
   const queryParams = new URLSearchParams(loc.search);
   const source = queryParams.get('source');
 
-  if (!user || !user.selectedTour) {
-    navigate('/');
-    return null;
-  }
+  useEffect(() => {
+    if (!user || !user.selectedTour) {
+      navigate('/');
+    }}, [user, navigate]);
   const handleAnchorClick = (tourd) => {
     
     // Navigate to TourDetails page with the selected tourId

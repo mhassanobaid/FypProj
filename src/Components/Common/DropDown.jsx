@@ -31,7 +31,7 @@ const DropDown = () => {
         {bookedToursLength > 0 && (
               <div className={DDCSS.tooltiptexT}></div>
             )}</NavLink></li>
-        <li style={{margin:'2px',padding:'2px'}}><NavLink className={DDCSS.dropDownItem} to="/profile">Manage Profile</NavLink></li>
+        <li style={{margin:'2px',padding:'2px'}}><NavLink className={DDCSS.dropDownItem} to="/ManagProf">Manage Profile</NavLink></li>
         <li style={{margin:'2px',padding:'2px'}}><NavLink className={DDCSS.dropDownItem} to="/favorites?source=f1">See Favorites
         {favoriteToursLength > 0 && (
               <div className={DDCSS.tooltiptext}></div>

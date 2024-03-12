@@ -22,6 +22,7 @@ import Navbar from './Components/Admin/Navbar';
 import UTourDetails from './pages/User/UTourDetails';
 import TBookingPdf from './pages/Tourist/TBookingPdf';
 import TFav from './pages/Tourist/TFav';
+import TManageProf from './pages/Tourist/TManageProf';
 
 
 
@@ -46,7 +47,7 @@ function App() {
             <Route path="/tourdet" element={<UTourDetails />} />
             <Route path="/tbooking" element={<TBooking/>} />
             <Route path="/tbookprint" element={<TBookingPdf/>} />
-            
+            <Route path="/ManagProf" element={<TManageProf/>} />
             <Route path="/favorites" element={<TFav/>} />
           </Routes>
           </UserProvider>

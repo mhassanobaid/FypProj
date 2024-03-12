@@ -1,3 +1,6 @@
 npm install react-scripts --force
 npm install styled-components --force
 npm install @react-pdf/renderer
+
+MySQL
+create database AAS;

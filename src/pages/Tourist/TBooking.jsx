@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useUser } from "../../Components/User/UserContext";
 import {
   TourDetailDv,
@@ -46,10 +46,10 @@ const TBooking = () => {
     return null;
   };
   // Redirect to home if user is not authenticated or selectedTour is not available
-  if (!user || !user.selectedTour) {
-    navigate("/");
-    return null;
-  }
+  useEffect(() => {
+    if (!user || !user.selectedTour) {
+      navigate('/');
+    }}, [user, navigate]);
 
   const { id, naam, location, image, price, tourists,departureDate,description } = user.selectedTour;
   const totalPrice = price * touristsValue;

@@ -11,6 +11,10 @@ const LinkList = ({ Auth,WelcomeMsg }) => {
   const auth = user ? true : false;
   
   const UseName = user? user.username : 'Welcome User';
+  const emaiL = user?user.email : '';
+  // if direct login occurs then extract username from email by regex
+  const usernamE = emaiL.match(/^[^@]*/)[0];
+
   const [optionsVisible, setOptionsVisible] = useState(false);
   const BookedToursLength = user?.bookedTours?.length || 0;
   const toggleOptions = () => {
@@ -38,7 +42,7 @@ const LinkList = ({ Auth,WelcomeMsg }) => {
              
               </li>
               
-            <p>{UseName}</p>
+            <p>{usernamE}</p>
             {BookedToursLength > 0 && <div className={LLCss.tooltiptext}><NotificationsActiveIcon/></div>}
             {optionsVisible && (
               
