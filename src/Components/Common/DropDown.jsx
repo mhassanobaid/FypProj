@@ -27,10 +27,12 @@ const DropDown = () => {
   return (
     <div className={DDCSS.dropDownProfile}>
       <ul>
+        <li style={{margin:'1px',padding:'1px'}}><NavLink className={DDCSS.dropDownItem} to="/tCSignUp">Sell Tours</NavLink></li>
         <li style={{margin:'2px',padding:'2px'}} ><NavLink className={DDCSS.dropDownItem} to="/favorites?source=b2">Booked Tours
         {bookedToursLength > 0 && (
               <div className={DDCSS.tooltiptexT}></div>
             )}</NavLink></li>
+
         <li style={{margin:'2px',padding:'2px'}}><NavLink className={DDCSS.dropDownItem} to="/ManagProf">Manage Profile</NavLink></li>
         <li style={{margin:'2px',padding:'2px'}}><NavLink className={DDCSS.dropDownItem} to="/favorites?source=f1">See Favorites
         {favoriteToursLength > 0 && (

@@ -77,10 +77,10 @@ return(
       {/* Render tour details here */}
       <img src={tour.image} alt="Tour" />
       <div>
-        <h3 style={{fontSize:'1.17em',fontWeight:'bold'}}><div class={TFCSS.tct}>{tour.naam}</div></h3>
+        <h3 style={{fontSize:'1.17em',fontWeight:'bold'}}><div class={TFCSS.tct}>{tour.title}</div></h3>
         <p><div style={dvSt}>Location:</div>&ensp;<div class={TFCSS.tct}>{tour.location}</div></p>
         <p><div style={dvSt}>Price per tourist:</div>&ensp;&ensp;&ensp;&ensp;<div class={TFCSS.tcts}><strong>{tour.price}$</strong></div></p>
-        <p><div style={dvSt}>Tourists:</div>&ensp;&nbsp;<div class={TFCSS.tct}>{tour.tourists}</div></p>
+        <p><div style={dvSt}>Tourists:</div>&ensp;&nbsp;<div class={TFCSS.tct}>{tour.number_of_persons}</div></p>
         
       </div>
     </TourCardd></div>
@@ -105,14 +105,14 @@ return(
   <div style={{ display: 'flex', flexDirection: 'row',marginBottom:'10px' }}>
   {/* Render tour details here */}
   <div style={{ display: 'flex', alignItems: 'center', marginLeft: '300px',border:'1px solid grey',width:'700px' }}> {/* Encapsulate the tour card content */}
-    <img src={tour.image} alt="Tour" style={{width:'450px',height:'200px',marginTop:'35px',marginLeft:'5px'}} />
+    <img src={tour.image_url} alt="Tour" style={{width:'450px',height:'200px',marginTop:'35px',marginLeft:'5px'}} />
     <div style={{ width: '100%', marginLeft: '10px',backgroundColor:'antiquewhite',padding:'10px' }}>
       <h3 style={{ fontSize: '1.17em', fontWeight: 'bold' }}>
-        <div className={TFCSS.tct}>{tour.naam}</div>
+        <div className={TFCSS.tct}>{tour.title}</div>
       </h3>
       <p><div style={dvSta}>Location:</div>&ensp;<div className={TFCSS.tct}>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;{tour.location}</div></p>
       <p><div style={dvSta}>Price per tourist:</div>&ensp;&ensp;<div className={TFCSS.tcts}>{tour.price}$</div></p>
-      <p><div style={dvSta}>Tourists Allowed:</div>&ensp;&nbsp;<div className={TFCSS.tcts}>{tour.tourists}</div></p>
+      <p><div style={dvSta}>Tourists Allowed:</div>&ensp;&nbsp;<div className={TFCSS.tcts}>{tour.number_of_persons}</div></p>
       <p><div style={dvSta}>Tourists Going:</div>&ensp;&ensp;&ensp;&nbsp;<div className={TFCSS.tcts}>{tour.touristsValue}</div></p>
       <p><div style={dvSta}>Total Amount:</div>&ensp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;<div className={TFCSS.tcts}>{tour.totalPrice}$</div></p>
       <p><div style={dvSta}>Departure Date:</div>&ensp;&ensp;&nbsp;<div className={TFCSS.tcts}>{tour.departureDate}</div></p>

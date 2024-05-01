@@ -4,3 +4,7 @@ npm install @react-pdf/renderer
 
 MySQL
 create database AAS;
+
+Jar file 
+mysql-connector will be required
+just copy paste above connector in lib folder of tomcat server folder

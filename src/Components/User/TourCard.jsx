@@ -1,50 +1,83 @@
 // TourCard.js
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import TCCss from "../User/TourCardCss.module.css";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useUser } from "../User/UserContext";
 import NotificationUI from "../Common/NotificationUI";
+import { selectClasses } from "@mui/material";
 
-const TourCard = ({ naam, image, location, price, tourists, tourss, tId,departureDate,description }) => {
+
+const TourCard = ({ title, image_url, location, price, number_of_persons, tourss, tourid,departure_date,descreption }) => {
+  
   const navigate = useNavigate();
   const [showTooltip, setShowTooltip] = useState(false);
   const [showProfileTooltip, setShowProfileTooltip] = useState(false);
   const { updateUser } = useUser();
-  const { user } = useUser();
+  let { user } = useUser();
 
   const [showNotification, setShowNotification] = useState(false);
+  const [showNotificationa, setShowNotificationa] = useState(false);
+  const [showNotificationb, setShowNotificationb] = useState(false);
   const hideNotification = () => {
     setShowNotification(false);
   };
+  const hideNotificationa = () => {
+    setShowNotificationa(false);
+  };
+  const hideNotificationb = () => {
+    setShowNotificationb(false);
+  };
+  // useEffect(() => {
+  //   // Convert BLOB data to URL
+  //   if (image) {
+  //     const blobUrl = URL.createObjectURL(new Blob([image]));
+
+  //     setImageUrl(blobUrl);
+  //     console.log(blobUrl);
+  //   }
+
+  //   // Clean up by revoking the URL when component unmounts
+  //   return () => {
+  //     if (imageUrl) {
+  //       URL.revokeObjectURL(imageUrl);
+  //     }
+  //   };
+  // }, [image]);
 
   const handleAnchorClick = (event) => {
-    console.log(image);
+
+    console.log(image_url);
+    console.log("Me in ANchor of tour Card(*_*)-"+tourid);
+       
+  
     // Navigate to TourDetails page with the selected tourId
     if (user) {
-      const updatedUser = { ...user };
-      updatedUser.selectedTour = Array.isArray(updatedUser.selectedTour) ? updatedUser.selectedTour : [];
-      updatedUser.selectedTour.push({
-        naam,
-        image,
+      console.log("DASDaa");
+       user = { ...user };
+       user.selectedTour = Array.isArray(user.selectedTour) ? user.selectedTour : [];
+       user.selectedTour.push({
+        title,
+        image_url,
         location,
         price,
-        tourists,
-        tId,
-        description,
-        departureDate
+        number_of_persons,
+        tourid,
+        descreption,
+        departure_date
       });
       
+
+   
       
-      console.log(user.bookedTours.length);
-      console.log(user);
+      
     } else {
-      alert("Please login first");
+      setShowNotificationa(true);
     }
     // Navigate to TourDetails page with the selected tourId
-
-    navigate("/tourdet", { state: { TourId: tId, Tours: tourss } });
+  console.log("TOURID is "+tourid+"\t");
+    navigate("/tourdet", { state: { TourId: tourid, Tours: tourss } });
   };
 
   const handleFavoriteClick = (event) => {
@@ -53,18 +86,18 @@ const TourCard = ({ naam, image, location, price, tourists, tourss, tId,departur
     if (user) {
       const updatedUser = { ...user };
       updatedUser.favorites = updatedUser.favorites ?? [];
-      const isTourAlreadyAdded = updatedUser.favorites.some((tour) => tour.tId === tId);
+      const isTourAlreadyAdded = updatedUser.favorites.some((tour) => tour.id === tourid);
       console.log(isTourAlreadyAdded);
       if(!isTourAlreadyAdded){
       updatedUser.favorites.push({
-        naam,
-        image,
+        title,
+        image_url,
         location,
         price,
-        tourists,
-        tId,
-        description,
-        departureDate
+        number_of_persons,
+        tourid,
+        descreption,
+        departure_date
       });
       console.log(user);
       updateUser(updatedUser);
@@ -80,19 +113,24 @@ const TourCard = ({ naam, image, location, price, tourists, tourss, tId,departur
         
       }
     } else {
-      alert("Please login first");
+      setShowNotificationb(true);
     }
   };
 
+
+
   return (
     <div className={TCCss.tourCard}>
-           {showNotification&& (<NotificationUI message="Tour already added to Favorite." onHide={hideNotification} position="fixed" left="700px" top="25px"  />)}
+           {showNotification&& (<NotificationUI message="Tour already added to Favorite." onHide={hideNotification} position="fixed" left="700px" top="25px" zIndex={20000}  />)}
+           {showNotificationa && (<NotificationUI message="Please log in First" onHide={hideNotificationa} position="fixed" left="700px" zIndex={20000} top="25px"  />)}
+           {showNotificationb && (<NotificationUI message="Please log in First" onHide={hideNotificationb} position="fixed" left="700px" zIndex={20000} top="25px"  />)}
       <a className={TCCss.hyp} onClick={handleAnchorClick}>
         <div className={TCCss.divInsideA}>
-          <img src={image} alt="Tour" className={TCCss.TourImage} />
+          
+          <img src={image_url} alt="Tour" className={TCCss.TourImage} />
           <div className={TCCss.tourDetails}>
             <div className={TCCss.flexContainr}>
-              <h3>{naam}</h3>
+              <h3>{title}</h3>
               <a onClick={handleFavoriteClick}>
                 <div class={TCCss.fvtIcn}>
                   <FavoriteIcon fontSize="large" />
@@ -110,7 +148,7 @@ const TourCard = ({ naam, image, location, price, tourists, tourss, tId,departur
             </p>
             <p>
               <div class={TCCss.insidecardtext}>Tourists:&nbsp;</div>
-              <div className={TCCss.dataComingToCard}>{tourists}</div>
+              <div className={TCCss.dataComingToCard}>{number_of_persons}</div>
             </p>
           
             {showTooltip && (

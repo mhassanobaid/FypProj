@@ -23,8 +23,10 @@ import UTourDetails from './pages/User/UTourDetails';
 import TBookingPdf from './pages/Tourist/TBookingPdf';
 import TFav from './pages/Tourist/TFav';
 import TManageProf from './pages/Tourist/TManageProf';
-
-
+import Wese from './pages/User/Wese';
+import SignUpForm from './Components/TourCompany/TCSignUp'
+import TCAddTour from './Components/TourCompany/TCAddTour'
+import TCSignUp from './Components/TourCompany/TCSignUp'
 
 function App() {
 
@@ -49,6 +51,12 @@ function App() {
             <Route path="/tbookprint" element={<TBookingPdf/>} />
             <Route path="/ManagProf" element={<TManageProf/>} />
             <Route path="/favorites" element={<TFav/>} />
+            <Route path="/wese" element={<Wese/>} />
+            <Route path="/tCSignUp" element={<SignUpForm/>} />
+            <Route path="/tCAddTour" element={<TCAddTour/>} />
+            <Route path="/tCSignUp" element={<TCSignUp/>} />
+            <Route path="/adminHome" element={<Main/>} />
+            
           </Routes>
           </UserProvider>
         </BrowserRouter>

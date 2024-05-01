@@ -19,13 +19,12 @@ background-color: #fff;
 border-radius: 10px;
 box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 position: relative;
-
-top:-80px;
-
+top: ${props => (props.top || -80)}px;
 overflow: hidden;
-width: 678px;
+width: ${props => (props.width || 678)}px;
 max-width: 100%;
 min-height: 400px;
+right: ${props => (props.right || 0)}px;
 `;
 
 export const wlcomeText = styled.div`
@@ -72,8 +71,9 @@ position: absolute;
 top: 0;
 height: 100%;
 transition: all 0.6s ease-in-out;
-left: 0;
-width: 50%;
+
+width:${props=>(props.width||50)}%;
+right: ${props => (props.right || 340)}px;
 z-index: 2;
 ${props => (props.signinIn !== true ? `transform: translateX(100%);` : null)}
 `;
@@ -87,6 +87,22 @@ flex-direction: column;
 padding: 0 50px;
 height: 100%;
 text-align: center;
+
+`;
+
+export const Formed = styled.form.attrs({
+  enctype: "multipart/form-data",
+  method: "post", // Add method attribute
+  action: "/TCSignUp"
+})`
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
 `;
 
 export const Title = styled.h1`
@@ -104,7 +120,7 @@ width: ${props=>props.wid?`${props.wid}px`:'100%'};
 
 export const TourDetailDv = styled.div`
 width: 700px; 
-height: 400px;
+height: 430px;
 max-width: 100%;
 max-height: 100%;
 overflow: hidden;

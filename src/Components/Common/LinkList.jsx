@@ -34,6 +34,7 @@ const LinkList = ({ Auth,WelcomeMsg }) => {
           <li><NavLink to="/about">About Us</NavLink></li>
           <li><NavLink to="/contact">Contact</NavLink></li>
           <li><NavLink to="/signup">SignUp</NavLink></li>
+          {/* <li><NavLink to="/wese">Wese</NavLink></li> */}
           <li><NavLink to="/signup?login=true">Log In</NavLink></li>
           {auth && (<div className={LLCss.lli}>
             <li onClick={toggleOptions}>

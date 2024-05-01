@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useUser } from "../../Components/User/UserContext";
 import {
   TourDetailDv,
@@ -13,6 +13,7 @@ import {
   BookingDet,
 } from "../../Components/Common/Components";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import logo from "../../Assets/images/logo.png";
 import bgImg from "../../Assets/images/sgnUp2a.jpg";
 import LinkList from "../../Components/Common/LinkList";
@@ -28,6 +29,7 @@ const TBooking = () => {
   const { updateUser } = useUser();
   const { user } = useUser();
   const navigate = useNavigate();
+
   const [Tourists, setTourists] = useState(1);
   const [confirmed, setConfirmed] = useState(false);
   const [showPDF, setShowPDF] = useState(false);
@@ -37,21 +39,58 @@ const TBooking = () => {
   const [showGoingTourist, setShowGoingTourist] = useState(false);
   const [tourCancelled, setTourCancelled] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showNotificationa, setShowNotificationa] = useState(false);
+  const [showNotificationb, setShowNotificationb] = useState(false);
   const [showAccountDetails, setShowAccountDetails] = useState(false);
+  const loc = useLocation();
+  const { tourCmp } = loc.state || {}; 
+  const {tourId} = loc.state|| 0;
+
+  // console.log("ME in TBooking me hn tour compny"+JSON.stringify(tourCmp)+"\n"+"Tour id jo chl rhe"+tourId);
+  // console.log("ME AYA FROM TOURDET"+JSON.stringify(tourCmp));
   const hideNotification = () => {
     setShowNotification(false);
+  };
+  const hideNotificationa = () => {
+    setShowNotificationa(false);
+  };
+  const hideNotificationb = () => {
+    setShowNotificationb(false);
   };
   const handleDash = () => {
     navigate("/");
     return null;
   };
   // Redirect to home if user is not authenticated or selectedTour is not available
-  useEffect(() => {
-    if (!user || !user.selectedTour) {
-      navigate('/');
-    }}, [user, navigate]);
+                            // useEffect(() => {
+                            //   if (!user || !user.selectedTour) {
+                            //     navigate("/");
+                            //   }
+                            // }, [user, navigate]);
 
-  const { id, naam, location, image, price, tourists,departureDate,description } = user.selectedTour;
+
+                            useEffect(() => {
+                              // Redirect to home page if user is not defined or selectedTour is not available
+                              if (!user?.selectedTour) {
+                                navigate("/");
+                              }
+                            }, [user, navigate]);
+                          
+                            if (!user?.selectedTour) {
+                              // If user or selectedTour is not defined, return null or any other component
+                              return null;
+                            }
+
+  const {
+    tourid,
+    title,
+    location,
+    image_url,
+    price,
+    number_of_persons,
+    departure_date,
+    descreption,
+  } = user.selectedTour;
   const totalPrice = price * touristsValue;
   // Company account details (replace with actual details)
   const companyAccountDetails = {
@@ -66,7 +105,7 @@ const TBooking = () => {
   };
 
   const handleDecrement = () => {
-    if (tourists > 1) {
+    if (number_of_persons > 1) {
       setTourists((prevTourists) => prevTourists - 1);
     }
   };
@@ -82,7 +121,7 @@ const TBooking = () => {
   const inputStyle = {
     marginLeft: "71px",
   };
-  
+
   const handleConfirmBooking = () => {
     setShowAccountDetails(true);
     setConfirmed(true);
@@ -90,7 +129,6 @@ const TBooking = () => {
     setShowGoingTourist(true);
   };
   const handleCancelDetailButton = () => {
-    
     setShowAccountDetails(false);
     setConfirmed(false);
     setShowTourists(true);
@@ -106,37 +144,51 @@ const TBooking = () => {
     setTouristsValue(e.target.value);
   };
   const handleConfirmBookingOne = () => {
-    if (touristsValue < tourists) {
+    console.log("INSIDE CONFIRM BOOKING ONE (*_*)\n");
+    const currentTimeStamp = new Date().toISOString();
+    console.log("Current Date and Time: when book is clicked", currentTimeStamp);
+           
+    if (touristsValue < number_of_persons) {
       updateUser((user) => ({
         ...user,
         bookedTours: [
           ...user.bookedTours,
           {
-            id: user.selectedTour.id,
-            naam: user.selectedTour.naam,
+            tourid: tourId,
+            title: user.selectedTour.title,
             location: user.selectedTour.location,
             price: user.selectedTour.price,
-            tourists: user.selectedTour.tourists,
-            image: user.selectedTour.image,
-            touristsGoing: touristsValue,
-            totalAmount: totalPrice,
-            departureDate: departureDate,
-            description: description
+            number_of_persons: user.selectedTour.number_of_persons,
+            image_url: user.selectedTour.image_url,
+            tourists_going: touristsValue,
+            total_amount: totalPrice,
+            departure_date: departure_date,
+            descreption: descreption,
+            bookedAt: currentTimeStamp 
             // Add other tour details as needed
           },
         ],
       }));
-      console.log(touristsValue);
+      console.log("Me in TBooking aur tourist jo ja rhe\n"+touristsValue);
       console.log(user);
+      for(let i=0;i<user.length;i++)
+      {
+        let ojk = user[i];
+        for(const key in ojk)
+           console.log(`${key}: ${ojk[key]}`);
+      }
+      console.log("JKJKJ REHEXTION "+tourid);
       navigate("/tbookprint", {
-        state: { CompDet: companyAccountDetails, BookTourId: id },
+        state: { tourCmp, BookTourId: tourid }
       });
     } else {
-      alert("Please don't exceed the limit of tourists for this package");
+      setShowNotificationa(true);
       setSucessMsg(false);
       setShowAccountDetails(false);
       setConfirmed(false);
       setShowTourists(true);
+      setShowGoingTourist(false);
+      
       return;
     }
   };
@@ -157,50 +209,74 @@ const TBooking = () => {
       alert("Please login first");
     } */
   }
-  const handleSuccess = () => {
-
+  const handleSuccess = async() => {
+    
+    console.log("INSIDE HANDLE SUCCESS (*_*)\n");
+    const currentTimeStamp = new Date().toISOString();
+    console.log("Current Date and Time: when book is clicked", currentTimeStamp);
     
 
-  
-    if (touristsValue < tourists) {
+    if (touristsValue < number_of_persons) {
       const updatedUser = { ...user };
       updatedUser.bookedTours = updatedUser.bookedTours ?? [];
+      let userid = user.id;
+      let status='booked';
       updatedUser.bookedTours.push({
-        id,
-        naam,
-        image,
+        userid,
+        tourId,
+        title,
+        image_url,
         location,
         price,
-        tourists,
+        number_of_persons,
         touristsValue,
         totalPrice,
-        departureDate
+        departure_date,
+        bookedAt: currentTimeStamp,
+        status: status
       });
+      try {                            
+        const response = await fetch("http://localhost:8199/ppppp/Demo", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...updatedUser.bookedTours, action: "bookTour" }), // Adding action property
+        });
+      
+        if (response.ok) {
+          console.log("Success: Data sent successfula");
+          console.log("USER SESSIOM<>:-__-"+JSON.stringify(user));
+          // navigate("/");
+        } else {
+          console.error("Error: Failed to send data");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
       console.log(user);
       updateUser(updatedUser);
     } else {
-      alert("Please don't exceed the limit of tourists for this package");
+      setShowNotificationb(true);
       setSucessMsg(false);
       setShowAccountDetails(false);
       setConfirmed(false);
       setShowTourists(true);
+      setShowGoingTourist(false);
       return;
     }
 
-
     setSucessMsg(true);
   };
-   const cancelTour = () => {
+  const cancelTour = () => {
     // Remove the recently pushed tour detail from bookedTours array
     updateUser((user) => ({
       ...user,
-      bookedTours: user.bookedTours.filter((tour) => tour.id !== id),
-
+      bookedTours: user.bookedTours.filter((tour) => tour.tourid !== tourid),
     }));
     setTourCancelled(true);
-     // Set tourCancelled state to true
+    // Set tourCancelled state to true
   };
-  
 
   // };
   // Add number of tourists
@@ -254,7 +330,7 @@ const TBooking = () => {
       <LinkList />
 
       <TourCompanyInfo>
-        <h4>Skyvilla Travellers</h4>
+        <h4>{tourCmp.company_name}</h4>
         <p>{location}</p>
         <pre>12 reviews</pre>
         <Roomicon>
@@ -280,7 +356,7 @@ const TBooking = () => {
               <h2>Booking Details</h2>
               <p>
                 <div style={pStyles}>Tour Name:</div>{" "}
-                <div style={insideP}>{naam}</div>
+                <div style={insideP}>{title}</div>
               </p>
               <p>
                 <div style={pStyles}>Location:</div>{" "}
@@ -294,7 +370,7 @@ const TBooking = () => {
                 <div>
                   <div style={pStyles}>Tourists Allowed</div>
                   <div style={{ marginLeft: "2px", display: "inline" }}>
-                    &ensp;&ensp;{tourists}
+                    &ensp;&ensp;{number_of_persons}
                   </div>
                   <label
                     style={{
@@ -338,8 +414,16 @@ const TBooking = () => {
 
               {confirmed && (
                 <p>
-                  <div style={pStyles}>Amount to Pay: $</div>&ensp;
-                  <h4 style={{ display: "inline", fontSize: "20px" }}>
+                  <div style={{ ...pStyles }}>Amount to Pay: $</div>&ensp;
+                  <h4
+                    style={{
+                      display: "inline",
+                      fontSize: "20px",
+                      backgroundColor: "#54eee3",
+                      color: "#000000",
+                      textDecoration: "underline",
+                    }}
+                  >
                     {totalPrice}
                   </h4>
                 </p>
@@ -360,20 +444,20 @@ const TBooking = () => {
                 <h2>Company Account Details</h2>
                 <p>
                   <div style={pStyles}>Company Name:</div> &ensp;&ensp;
-                  {companyAccountDetails.companyName}
+                  {tourCmp.company_name}
                 </p>
                 <p>
                   <div style={pStyles}>Account Number:</div> &ensp;&ensp;
-                  {companyAccountDetails.accountNumber}
+                  {tourCmp.account_number}
                 </p>
                 <p>
                   <div style={pStyles}>Bank Name:</div>
                   &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-                  {companyAccountDetails.bankName}
+                  {tourCmp.bank_name}
                 </p>
                 <p>
                   <div style={pStyles}>Account Holder:</div>{" "}
-                  &ensp;&ensp;&ensp;&nbsp;{companyAccountDetails.accountHolder}
+                  &ensp;&ensp;&ensp;&nbsp;{tourCmp.account_holder}
                 </p>
                 <Button style={buttonStyle} onClick={handleCancelDetailButton}>
                   Cancel Details
@@ -389,7 +473,7 @@ const TBooking = () => {
           )}{" "}
         </>
       )}
-      {sucessMsg && !tourCancelled &&(
+      {sucessMsg && !tourCancelled && (
         <div style={divSt}>
           <img src={congrat} style={{ height: "40px", width: "40px" }} />
           <pre
@@ -408,10 +492,12 @@ const TBooking = () => {
           >
             Move to Dashboard
           </Button>
-          <Button style={{ marginLeft: "50px" }} onClick={cancelTour}>Cancel Tour</Button>
+          <Button style={{ marginLeft: "50px" }} onClick={cancelTour}>
+            Cancel Tour
+          </Button>
         </div>
       )}
-         {sucessMsg && tourCancelled && (
+      {sucessMsg && tourCancelled && (
         <div style={divSt}>
           <img src={congrat} style={{ height: "40px", width: "40px" }} />
           <pre
@@ -432,12 +518,39 @@ const TBooking = () => {
           </Button>
         </div>
       )}
-      {
-      showNotification && (<>
-      
-      <NotificationUI message="Tour already booked by you." onHide={hideNotification} position="fixed" left="700px" top="25px"/>
-      </>)
-      }
+      {showNotification && (
+        <>
+          <NotificationUI
+            message="Tour already booked by you."
+            onHide={hideNotification}
+            position="fixed"
+            left="700px"
+            top="25px"
+          />
+        </>
+      )}
+      {showNotificationa && (
+        <>
+          <NotificationUI
+            message="Please don't exceed the limit of tourists for this package"
+            onHide={hideNotificationa}
+            position="fixed"
+            left="730px"
+            top="135px"
+          />
+        </>
+      )}
+{showNotificationb && (
+        <>
+          <NotificationUI
+            message="Please don't exceed the limit of tourists for this package"
+            onHide={hideNotificationb}
+            position="fixed"
+            left="730px"
+            top="135px"
+          />
+        </>
+      )}
 
       <Footer Top={130} />
       {/* Additional content for payment, confirmation, etc. can be added here */}

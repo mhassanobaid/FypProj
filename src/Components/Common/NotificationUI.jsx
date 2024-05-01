@@ -14,13 +14,14 @@ const StyledNotificationBanner = styled.div`
   top: ${props => props.top};
   transform: translateX(-50%);
   font-weight: bold;
+  z-index: ${props => props.zIndex};
 `;
 
-const NotificationUI = ({ message, onHide,position ,left,top }) => {
+const NotificationUI = ({ message, onHide,position ,left,top,zIndex,duration }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onHide();
-    }, 4000); // Hide after 4 seconds
+    }, duration || 4000); // Hide after 4 seconds
 
     return () => {
       clearTimeout(timer);
@@ -28,7 +29,7 @@ const NotificationUI = ({ message, onHide,position ,left,top }) => {
   }, [onHide]);
 
   return (
-    <StyledNotificationBanner position={position} left={left} top={top}>
+    <StyledNotificationBanner position={position} left={left} top={top} zIndex={zIndex}>
     {message}
   </StyledNotificationBanner>
   );

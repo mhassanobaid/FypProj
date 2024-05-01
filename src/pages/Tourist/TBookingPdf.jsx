@@ -20,9 +20,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     marginBottom: 10,
-    fontWeight: 'bold',
+    
+    fontWeight: 'bolder',
   },
   detail: {
     fontSize: 14,
@@ -36,41 +37,49 @@ const buttonSt = {
 
 const TBookingPdf = ({ tourDetails, accountDetails }) => {
   const { user } = useUser();
+  const { updateUser } = useUser();
   const navigate = useNavigate();
   const loc = useLocation();
-  const CompDetail = loc.state?.CompDet ?? {};
-  const mgs = loc.state?.Msg?? false;
-  const [sucessMsg, setSucessMsg] = useState(mgs);
-  const bookTourId = loc.state?.BookTourId;
+  // const CompDetail = loc.state?.tourCmp ?? {};
+  // const mgs = loc.state?.Msg?? false;
+  // const [CompDetail, setSucessMsg] = useState(mgs);
+  // const bookTourId = loc.state?.BookTourId;
+  const { tourCmp, BookTourId } = loc.state;
+  console.log("KMLASHAH"+JSON.stringify(tourCmp)+"HERASHA"+BookTourId);
   const [bookedTour, setBookedTour] = useState({});
-  const { updateUser } = useUser();
   const [cancelDet,setCancelDet] = useState(false);
-  
-
+  const [sucessMsg,setSucessMsg] = useState(false);
+ 
   const bookedTourss = user?.bookedTours;
    
-  useEffect(() => {
-    if (!user || !user.selectedTour) {
-      navigate('/');
-    }}, [user, navigate]);
+                                    useEffect(() => {
+                                      if (!user?.selectedTour) {
+                                        navigate('/');
+                                      }}, [user, navigate]);
+                                      
+
+
+
+                                  
   // const { id,naam, location, image,price, tourists,touristsGoing,totalAmount } = user.bookedTours;
+  
   useEffect(() => {
     if (user && user.bookedTours) {
       // Assuming you have only one booked tour for simplicity, otherwise, you need to iterate over booked tours
-      let foundTour = bookedTourss.find(tour => tour.id === bookTourId);
+      let foundTour = bookedTourss.find(tour => tour.tourid === BookTourId);
       // Update state with the found tour
       console.log(foundTour);
       setBookedTour(foundTour || {});
       console.log(bookedTour);
       
      }
-  }, [user, bookTourId, bookedTourss]);
+  }, [user, BookTourId, bookedTourss]);
   const handleCancel = () => {
     
-    console.log(bookTourId);
+    console.log(BookTourId);
     updateUser((user) => ({
       ...user,
-      bookedTours: user.bookedTours.filter((tour) => tour.id !== bookTourId),
+      bookedTours: user.bookedTours.filter((tour) => tour.id !== BookTourId),
 
     }));
     setCancelDet(true);
@@ -133,11 +142,11 @@ const TBookingPdf = ({ tourDetails, accountDetails }) => {
       </>)}
       {!cancelDet && (<>
     { !(sucessMsg) && (<>
-          <PDFDownloadLink document={<MyPDFDocument bookedTour={bookedTour} CompDetail={CompDetail} />} fileName="booking_details.pdf">
+          <PDFDownloadLink document={<MyPDFDocument bookedTour={bookedTour} tourCmp={tourCmp} />} fileName="booking_details.pdf">
             {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download PDF')}
           </PDFDownloadLink>
           <PDFViewer style={{ width: '100%', height: '50vh', marginTop: '5px' }}>
-            <MyPDFDocument bookedTour={bookedTour} CompDetail={CompDetail} />
+            <MyPDFDocument bookedTour={bookedTour} tourCmp={tourCmp} />
           </PDFViewer>
         </>)}
     {sucessMsg && (
@@ -155,23 +164,25 @@ const TBookingPdf = ({ tourDetails, accountDetails }) => {
   </>
   );
 };
-const MyPDFDocument = ({ bookedTour, CompDetail }) => (
+const MyPDFDocument = ({ bookedTour, tourCmp }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
         <Text style={styles.title}>Tour Booking Details</Text>
-        <Text style={styles.detail}>Tour Name: {bookedTour.naam || ''}</Text>
+        <Text style={styles.detail}>Tour Name: {bookedTour.title || ''}</Text>
         <Text style={styles.detail}>Location: {bookedTour.location || ''}</Text>
         <Text style={styles.detail}>Price per Tourist: ${bookedTour.price || ''}</Text>
-        <Text style={styles.detail}>Number of Tourists Allowed in package: {bookedTour.tourists || ''}</Text>
-        <Text style={styles.detail}>Number of Tourists going in package: {bookedTour.touristsGoing || ''}</Text>
-        <Text style={styles.detail}>Total Amount to Pay: ${bookedTour.totalAmount || ''}</Text>
+        <Text style={styles.detail}>Number of Tourists Allowed in package: {bookedTour.number_of_persons || ''}</Text>
+        <Text style={styles.detail}>Number of Tourists going in package: {bookedTour.tourists_going || ''}</Text>
+        <Text style={styles.detail}>Total Amount to Pay: ${bookedTour.total_amount || ''}</Text>
       </View>
       <View style={styles.section}>
         <Text style={styles.title}>Company Account Details</Text>
-        <Text style={styles.detail}>Account Number: {CompDetail.accountNumber}</Text>
-        <Text style={styles.detail}>Bank Name: {CompDetail.bankName}</Text>
-        <Text style={styles.detail}>Account Holder: {CompDetail.accountHolder}</Text>
+        <Text style={styles.detail}>Company Name: {tourCmp.company_name}</Text>
+        <Text style={styles.detail}>Account Number: {tourCmp.account_number}</Text>
+        <Text style={styles.detail}>Bank Name: {tourCmp.bank_name}</Text>
+        <Text style={styles.detail}>Account Holder: {tourCmp.account_holder}</Text>
+        <Text style={styles.detail}>Account Holder CNIC: {tourCmp.cnic}</Text>
       </View>
     </Page>
   </Document>

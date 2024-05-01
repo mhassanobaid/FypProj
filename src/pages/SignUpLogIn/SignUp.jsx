@@ -1,4 +1,3 @@
-// SignUp.js
 import React, { useState, useEffect } from "react";
 import * as Components from "../../Components/Common/Components";
 import { useNavigate } from "react-router-dom";
@@ -23,222 +22,12 @@ import NotificationUI from "../../Components/Common/NotificationUI";
 
 const SignUp = (onViewChange) => {
   const location = useLocation();
-  let rq = -1;
+
   let isLogin = new URLSearchParams(location.search).get("login");
-  const { user, updateUser } = useUser();
-  var [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [contactNo, setContactNo] = useState();
-  const [jumpLogin, setJumpLogin] = useState(false);
-  const [showSearchBar, setShowSearchBar] = useState(true);
-  const [currentView, setCurrentView] = useState("tours");
-  const userType = "0";
-  const [showHeader, setShowHeader] = useState(true);
-  const [fromSignUp, setFromSignUp] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
-  const hideNotification = () => {
-    setShowNotification(false);
-  };
   const navigate = useNavigate();
-  const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const isValidPassword = (password) => {
-    return password.length >= 8;
-  };
-
-  const validateUserData = (fullName, email, password) => {
-    const isValid =
-      fullName.trim() !== "" &&
-      email.trim() !== "" &&
-      password.trim() !== "" &&
-      isValidEmail(email) &&
-      isValidPassword(password);
-
-    return isValid;
-  };
-
-  const validateUserDatae = (email, password) => {
-    const isValid =
-      email.trim() !== "" &&
-      password.trim() !== "" &&
-      isValidEmail(email) &&
-      isValidPassword(password);
-
-    return isValid;
-  };
-  const handleSignUp = async () => {
-    let FName = document.querySelector('input[name="Fname"]');
-    let FirstName = FName ? FName.value : "";
-    let LName = document.querySelector('input[name="Lname"]');
-    let LastName = LName ? LName.value : "";
-    let emailInput = document.querySelector('input[name="email"]');
-    let Email = emailInput ? emailInput.value : "";
-    let pwdInput = document.querySelector('input[name="password"]');
-    let Pwd = pwdInput ? pwdInput.value : "";
-    let phoneNo = document.querySelector('input[name="phone"]');
-    let pNo = phoneNo ? phoneNo.value : "";
-   rq = 0;
-    if (!FirstName || !LastName || !Email || !Pwd || !pNo) {
-      alert("Please fill out all fields.");
-      return;
-    }
-
-    // Validate first name and last name (only alphabets)
-    const nameRegex = /^[A-Za-z]+$/;
-    if (!nameRegex.test(FirstName) || !nameRegex.test(LastName)) {
-      alert("Please enter a valid first and last name (alphabets only).");
-      return;
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(Email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    // Validate password length
-    if (Pwd.length < 8) {
-      alert("Password must be at least 8 characters long.");
-      return;
-    }
-
-    // Validate phone number (only numeric and 10 digits)
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(pNo)) {
-      alert("Please enter a valid 10-digit phone number.");
-      return;
-    }
-
-    console.log(FirstName + LastName + Email, Pwd, pNo);
-
-    // Validation passed, continue with sign up process
-    const isValid = validateUserData(FirstName, LastName, Email, Pwd, pNo);
-
-    try {
-      const response = await fetch(
-        "http://localhost:8080/fypPract/SignUpServlet",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: `FName=${encodeURIComponent(
-            FirstName
-          )}&LName=${encodeURIComponent(LastName)}&Email=${encodeURIComponent(
-            Email
-          )}&Password=${encodeURIComponent(Pwd)}&UserType=${encodeURIComponent(
-            userType
-          )}&Number=${encodeURIComponent(pNo)}&rq=${encodeURIComponent(rq)}`,
-        }
-      );
-
-      if (response.ok) {
-        // Handle success (e.g., show a success message)
-        console.log("-][-");
-        console.log("Succes");
-        // navigate('/Login');
-
-        // if (isValid) {
-        //   // Update the user state in the UserContext
-        //   let Name = FirstName+LastName;
-        //   updateUser({
-        //     username: Name,
-        //     email: Email,
-        //     psd: Pwd,
-        //     phoneno: pNo,
-        //     bookedTours: [],
-        //     favorites: [],
-        //     selectedTour: [],
-        //   });
-
-        //  navigate("/");
-
-        // } else {
-        //   console.error("Invalid user data");
-        // }
-      } else {
-        console.error("Sign Up Failed456");
-      }
-    } catch (error) {
-      console.error("Error:123", error);
-      console.log(fullName + email + password);
-    }
-  };
-
-  const handleSignIn = async () => {
-    let emailInput = document.querySelector('input[name="emaile"]');
-    let Email = emailInput ? emailInput.value : "";
-    let pwdInput = document.querySelector('input[name="passworde"]');
-    let Pwd = pwdInput ? pwdInput.value : "";
-rq=1;
-    if (Email == "" || Pwd == "") {
-      alert("Please fill fields");
-      return;
-    }
-
-    const isValid = validateUserDatae(Email, Pwd);
-    
-    if (isValid) {
-      // Update the user state in the UserContext
-
-      if (Email === "admin@gmail.com" && Pwd === "12345678")
-      {  navigate("/admin");}
-        try {
-          
-          const response = await fetch(
-            "http://localhost:8080/fypPract/LogInServlet",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-              },
-              body: `email=${encodeURIComponent(Email)}&password=${encodeURIComponent(Pwd)}&rq=${encodeURIComponent(rq)}}`,
-            }
-          );
-          
-          if (response.ok) {
-            // Login successful
-            // const responseData = await response.json();
-            const responseData = await response.json();
-            console.log("Login successful:"+responseData);
-
-            updateUser({
-              username: Email,
-              email: Email,
-              bookedTours: [],
-              favorites: [],
-              selectedTour: [],
-            });
-
-            // Redirect the user to the home page or perform other actions
-
-            navigate("/");
-          } else {
-            // Login failed
-            console.error("Login failed");
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        }
-
-        // Now, you can navigate to the home page or perform other actions
-      
-    } else {
-      // Handle validation errors
-      console.error("Invalid user data");
-    }
-    //   const cp = document.querySelector('input[name="emaile"]');
-    //   setFullName(cp.value);
-    //   setAuthenticated(true);
-    //   navigate("/home", {state:{userName:cp.value,userAuthenticated:true}});
-  };
-
+  const { user, updateUser } = useUser();
+  const [showNotification, setShowNotification] = useState(false);
+  const [showNotificationa, setShowNotificationa] = useState(false);
   let [signIn, toggle] = React.useState(false);
   // console.log('HEER'+isLogin);
 
@@ -248,6 +37,113 @@ rq=1;
       toggle(true);
     } else toggle(false);
   }, [isLogin]);
+  const [formData, setFormData] = useState({
+    // Define your form fields here
+    // Example:
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    phone: "",
+  });
+  const hideNotification = () => {
+    setShowNotification(false);
+  };
+  const hideNotificationa = () => {
+    setShowNotificationa(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {                            
+      const response = await fetch("http://localhost:8199/ppppp/Demo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...formData, action: "signup" }), // Adding action property
+      });
+    
+      if (response.ok) {
+        console.log("Success: Data sent successfula");
+        let fulname = formData.firstname + " " + formData.lastname;
+        updateUser({
+          id: formData.id,
+          username: fulname,
+          email: formData.email,
+          psd: formData.password,
+          phoneno: formData.phone,
+          bookedTours: [],
+          favorites: [],
+          selectedTour: [],
+        });
+        console.log(fulname);
+        console.log(formData);
+        console.log("USER SESSIOM<>:-__-"+JSON.stringify(user));
+        navigate("/");
+      } else {
+        console.error("Error: Failed to send data");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8199/ppppp/Demo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...formData, action: "login" }), // Adding action property
+      });
+    
+      if (response.ok) {
+        console.log("Successed: Logged in successfullydadas");
+
+        try {
+          const userData = await response.json();
+          console.log("RESPONSE IN JSON:--__--"+userData);
+          // console.log(userData.userType+"\n");
+          let fulname = userData.firstName + " " + userData.lastName;
+          console.log("fill name:---"+fulname);
+          updateUser({
+            id: userData.id,
+            username: fulname,
+            email: userData.email,
+            psd: userData.password,
+            phoneno: userData.phoneNo,
+            bookedTours: [],
+            favorites: [],
+            selectedTour: [],
+          });
+          console.log("USER SESSION:--__--"+JSON.stringify(user));
+                         
+          if(userData.userType == 2)
+                navigate("/adminHome");   
+          else
+                navigate("/");
+        } catch (jsonError) {
+          console.error("Error parsing JSON:", jsonError);
+        }
+        // Handle successful login
+      } else {
+        const errorMessage = await response.text();
+        setShowNotificationa(true);
+        throw new Error(errorMessage);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className={SUCss.body}>
@@ -258,6 +154,16 @@ rq=1;
           position="fixed"
           left="700px"
           top="25px"
+        />
+      )}
+         {showNotificationa && (
+        <NotificationUI
+          message="Incorrect Email or password"
+          onHide={hideNotificationa}
+          position="fixed"
+          left="700px"
+          top="160px"
+          zIndex={200000}
         />
       )}
       {/* <HeaderWTC forSU={true} fullWidth={true}/> */}
@@ -284,12 +190,14 @@ rq=1;
                 <Components.Input
                   type="email"
                   placeholder="Email"
-                  name="emaile"
+                  name="email"
+                  onChange={handleChange}
                 />
                 <Components.Input
                   type="password"
                   placeholder="Password"
-                  name="passworde"
+                  name="password"
+                  onChange={handleChange}
                 />
                 <Components.Anchor href="#">
                   Forgot your password?
@@ -306,29 +214,34 @@ rq=1;
                 <Components.Input
                   type="text"
                   placeholder="First Name"
-                  name="Fname"
+                  name="firstname"
+                  onChange={handleChange}
                 />
                 <Components.Input
                   type="text"
                   placeholder="Last Name"
-                  name="Lname"
+                  name="lastname"
+                  onChange={handleChange}
                 />
                 <Components.Input
                   type="email"
                   placeholder="Email"
                   name="email"
+                  onChange={handleChange}
                 />
                 <Components.Input
                   type="password"
                   placeholder="Password"
                   name="password"
+                  onChange={handleChange}
                 />
                 <Components.Input
                   type="tel"
                   placeholder="Phone Number"
                   name="phone"
+                  onChange={handleChange}
                 />
-                <Components.Button onClick={handleSignUp}>
+                <Components.Button onClick={handleSubmit}>
                   Sign Up
                 </Components.Button>
               </Components.Form>
@@ -354,7 +267,7 @@ rq=1;
               <Components.RightOverlayPanel signinIn={signIn}>
                 <Components.Title>Hello, User!</Components.Title>
                 <Components.Paragraph>
-                  Enter Your personal details and start journey with us
+                  Enter Your personale details and start journey with us
                 </Components.Paragraph>
                 <Components.GhostButton onClick={() => toggle(false)}>
                   Sign Up
