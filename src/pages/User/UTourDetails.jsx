@@ -45,14 +45,14 @@ const UTourDetails = () => {
   // const fromFav = loc.state.fromFav ? loc.state.fromFav : 0;
   const tourId = loc.state?.TourId ?? "";
   const fromFav = loc.state?.fromFav ?? 0;
-  console.log("TUNESISLONELY"+tourId);
+  console.log("TUNESISLONELY"+tourId+"\nMe TFav se aya ya nhn"+fromFav);
 
 
   const [TCompData, setTCompData] = useState([]);
   const [tourCmp, setTourCmp] = useState({});
  
   const selectedTour = fromFav
-    ? favoritess.find((tour) => tour.tId === tourId)
+    ? favoritess.find((tour) => tour.tourid === tourId)
     : tours.find((tour) => tour.tourid === tourId);
  
     const {
@@ -79,6 +79,37 @@ const UTourDetails = () => {
  
 
                     
+  async function fetchTComp() {
+    console.log("ME IN FETCH TComp:--" + JSON.stringify(TCompData));
+    try {
+      const requestBody = { action: "retrieveTComp" };
+      const response = await fetch("http://localhost:8199/ppppp/AdminUserRet", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody), // Sending action of 'retrieveTours'
+      });
+
+      if (response.ok) {
+        console.log("Success: Retrieved tour Companies (*)_(*) successfully");
+        try {
+          const tourCompaniesData = await response.json();
+          console.log(tourCompaniesData);
+          setTCompData(tourCompaniesData);
+          setTourCompany(company_id);
+          //TCompData
+        
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      } else {
+        console.error("Failed to retrieve tours:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching tours companies:", error);
+    }
+  };
 
 
                       // useEffect(() => {
@@ -164,8 +195,13 @@ const UTourDetails = () => {
   // Add number_of_days to departureDate
   departureDate.setDate(departureDate.getDate() + number_of_days);
 
-  // Format arrivalDate to your desired format (e.g., "YYYY-MM-DD")
-  const arrival_date = departureDate.toISOString().split("T")[0];
+  // Format arrivalDate to your desired format (e.g., "YYYY-MM-DD")let arrival_date;
+  let arrival_date;
+if (!isNaN(departureDate.getTime())) {
+  arrival_date = departureDate.toISOString().split("T")[0];
+} else {
+  arrival_date = "Invalid Date";
+}
 
   const handleBookPackage = () => {
     // Get current date
@@ -174,12 +210,14 @@ const UTourDetails = () => {
     console.log(currentDateString);
     // Check if current date is less than or equal to departure date and tourists is greater than 1
     if (user) {
-      if (currentDateString <= departure_date && number_of_persons > 1) {
+      console.log("I am in book package button \n" + tourId);
+      console.log(user);
+      if (number_of_persons >= 1) {
         // Assuming you have a route named '/account-details'
 
         if (selectedTour) {
           const isTourAlreadyBooked = user.bookedTours.some(
-            (tour) => tour.tourid === tourid
+            (tour) => tour.tourId === tourid
           );
           console.log(isTourAlreadyBooked + "jh");
           // Update user context with selected tour details
@@ -187,7 +225,7 @@ const UTourDetails = () => {
             updateUser({
               ...user,
               selectedTour: {
-                tourid: selectedTour.tourid,
+                tourid: tourId,
                 title: selectedTour.title,
                 location: selectedTour.location,
                 price: selectedTour.price,
@@ -199,7 +237,7 @@ const UTourDetails = () => {
                 // Add other tour details as needed
               },
             });
-            console.log(user);
+            console.log("KONSE TOUR ME HN"+tourId);
             navigate("/tbooking", { state: { tourCmp, tourId } });
 
           } else {
@@ -217,38 +255,7 @@ const UTourDetails = () => {
     }
   };
 
-  const fetchTComp = async () => {
-    console.log("ME IN FETCH TComp:--" + JSON.stringify(TCompData));
-    try {
-      const requestBody = { action: "retrieveTComp" };
-      const response = await fetch("http://localhost:8199/ppppp/AdminUserRet", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody), // Sending action of 'retrieveTours'
-      });
-
-      if (response.ok) {
-        console.log("Success: Retrieved tour Companies (*)_(*) successfully");
-        try {
-          const tourCompaniesData = await response.json();
-          console.log(tourCompaniesData);
-          setTCompData(tourCompaniesData);
-          setTourCompany(company_id);
-          //TCompData
-        
-        } catch (error) {
-          console.error("Error parsing JSON:", error);
-        }
-      } else {
-        console.error("Failed to retrieve tours:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching tours companies:", error);
-    }
-  };
-
+ 
   const containerStyles = {
     width: "100vw",
     height: "30vh",

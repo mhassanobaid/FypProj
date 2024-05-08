@@ -68,28 +68,83 @@ const TBookingPdf = ({ tourDetails, accountDetails }) => {
       // Assuming you have only one booked tour for simplicity, otherwise, you need to iterate over booked tours
       let foundTour = bookedTourss.find(tour => tour.tourid === BookTourId);
       // Update state with the found tour
+      console.log("FOUNDED TOUR in TBOOKINGPDF\n");
       console.log(foundTour);
       setBookedTour(foundTour || {});
+      console.log("BOOKED TOUR TBOOKINGPDF");
       console.log(bookedTour);
       
      }
   }, [user, BookTourId, bookedTourss]);
-  const handleCancel = () => {
+    const {bookedAt,departure_date,descreption,image_url,location,number_of_persons,price,title,total_amount,tourid,tourists_going}=bookedTour;
+  const handleCancel = async() => {
     
-    console.log(BookTourId);
-    updateUser((user) => ({
-      ...user,
-      bookedTours: user.bookedTours.filter((tour) => tour.id !== BookTourId),
+    try {
+      // Send a POST request to the server to delete the tour
+      const response = await fetch("http://localhost:8199/ppppp/Demo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tourId: tourid, userId: user.id,action: "cancelTour" }), // Send the tourId to be deleted
+      });
+  
+      if (response.ok) {
+        // If the deletion is successful, update the user's bookedTours array
+        updateUser((user) => ({
+          ...user,
+          bookedTours: user.bookedTours.filter((tour) => tour.tourid !== tourid),
+        }));
+        setCancelDet(true); // Set tourCancelled state to true
+      } else {
+        console.error("Error: Failed to cancel tour");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    
 
-    }));
-    setCancelDet(true);
     // navigate('/');
   };
  
-  const handleSuccess = ()=>{
+  const handleSuccess = async()=>{
   
-    setSucessMsg(true);
 
+    const updatedUser = { ...user };
+      
+      let userid = user.id;
+      let status='booked';
+      const objj = { userid: userid, tourId: tourid, title: title,price:price,number_of_persons:number_of_persons,touristsValue:tourists_going,totalPrice:total_amount,departure_date:departure_date };
+      try {                            
+        const response = await fetch("http://localhost:8199/ppppp/Demo", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...objj, action: "bookTour" }), // Adding action property
+        });
+      
+        if (response.ok) {
+          setSucessMsg(true);      
+          console.log("Success: Data sent successfula");
+          console.log("USER SESSIOM<>:-__-"+JSON.stringify(user));
+          // navigate("/");
+        } else {
+          console.error("Error: Failed to send data");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+      console.log("Me in TBooking showing user");
+      console.log(user);
+      
+
+    
+
+  }
+  const handleCancelDetail =()=>
+  {
+    navigate("/tbooking", { state: { tourCmp, tourid } });
   }
   const divSt = {
 
@@ -154,10 +209,10 @@ const TBookingPdf = ({ tourDetails, accountDetails }) => {
             <img src={congrat} style={{height:'40px',width:'40px'}}/>
               <pre style={{display:'inline',position:'relative',top:'-16px',fontSize:'20px'}}>Congratulations tour booked Successfully</pre>
               <Button onClick={handleSuces} style={{marginTop:'30vh',marginLeft:'8px'}}>Move to Dashboard</Button>
-              <Button style={{marginLeft:'50px'}} onClick={handleCancel}>Cancel Tour</Button>
+              <Button style={{marginLeft:'50px'}} onClick={handleCancel}>Cancel Detail</Button>
       </div>
     )}
-    { !(sucessMsg) &&  (<><Button style={buttonSt} onClick={handleSuccess}>Book Tour</Button><Button style={{marginLeft:'50px'}} onClick={handleCancel}>Cancel Tour</Button></>)
+    { !(sucessMsg) &&  (<><Button style={buttonSt} onClick={handleSuccess}>Book Tour</Button><Button style={{marginLeft:'50px'}} onClick={handleCancelDetail}>Cancel Detail</Button></>)
     }
 </>)}
     <Footer Top={130}/>

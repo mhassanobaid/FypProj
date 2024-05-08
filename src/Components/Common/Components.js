@@ -116,6 +116,8 @@ border: none;
  padding: ${props => props.paddingTB ? `${props.paddingTB}px` : '12px'} ${props => props.paddingLR ? `${props.paddingLR}px` : '15px'};
 margin: 8px 0;
 width: ${props=>props.wid?`${props.wid}px`:'100%'};
+padding-left: 30px
+
 `;
 
 export const TourDetailDv = styled.div`

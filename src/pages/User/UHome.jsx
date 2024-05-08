@@ -13,7 +13,7 @@ import { useLocation, useParams } from "react-router-dom";
 import UContact from "./UContact";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../Components/User/UserContext";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import NotificationUI from "../../Components/Common/NotificationUI";
 
 const UHome = () => {
@@ -29,18 +29,15 @@ const UHome = () => {
   const [formData, setFormData] = useState({});
   const [showNotification, setShowNotification] = useState(false);
   const navigate = useNavigate();
-  
- 
-  const hideNotificationa=()=>{
+
+  const hideNotificationa = () => {
     setShowNotificationa(false);
-  }
+  };
   // const loc = useLocation();
   // var userNam = loc.state?.userName ?? 'Welcome User';
   // useEffect(() => {
   //   setUserAuthenticated(loc.state?.userAuthenticated ?? false);
   // }, [loc.state?.userAuthenticated]);
-
-  
 
   const handleContactClick = () => {
     setCurrentView("contactDetails");
@@ -69,10 +66,14 @@ const UHome = () => {
     setShowHeader(false);
   };
 
+
+
   const fetchTours = async (formData = null) => {
-    console.log("ME IN FETCH TORs:--"+JSON.stringify(formData));
+    console.log("ME IN FETCH TORs:--" + JSON.stringify(formData));
     try {
-      const requestBody = formData ? { action: "retrieveTours", ...formData } : { action: "retrieveTours" };
+      const requestBody = formData
+        ? { action: "retrieveTours", ...formData }
+        : { action: "retrieveTours" };
       const response = await fetch("http://localhost:8199/ppppp/AdminUserRet", {
         method: "POST",
         headers: {
@@ -80,32 +81,32 @@ const UHome = () => {
         },
         body: JSON.stringify(requestBody), // Sending action of 'retrieveTours'
       });
-
+       console.log("RESPONSE IS :-"+response);
       if (response.ok) {
         console.log("Success: Retrieved tours successfully");
 
         try {
           const toursData = await response.json();
-          if (formData && Object.keys(formData).length !== 0) {
-           if(toursData.length===0)
-           {
-            
-            setShowNotificationa(true);
-           }
-           else{
-            //setShowNotification(true);
-            
-          console.log("Received Response", toursData);
-          setTours(toursData);
-          console.log("Received Response Type", typeof toursData);
-          
-        }
-      }else{
-        console.log("popippo");
-        setShowNotification(false);
-        setTours(toursData);
-      }
+          if (formData && formData.location && formData.money && formData.tourists) {
+            console.log("\n__--__\n");  
+            console.log(formData);
+            console.log("\n__--__\n");  
+            if (toursData.length === 0) {
+              setShowNotification(false);
+              setShowNotificationa(true);
+            } else {
+              setShowNotification(true);
 
+              console.log("Received Response", toursData);
+              setTours(toursData);
+              
+              console.log("Received Response Type", typeof toursData);
+            }
+          } else {
+            console.log("popippo");
+            setShowNotification(false);
+            setTours(toursData);
+          }
         } catch (error) {
           console.error("Error parsing JSON:", error);
         }
@@ -118,7 +119,7 @@ const UHome = () => {
   };
   useEffect(() => {
     // Fetch tours from backend API
-    
+
     fetchTours();
   }, []);
 
@@ -127,7 +128,6 @@ const UHome = () => {
     console.log("Tours Array of objects: ", tourc);
     // console.log("Tours Image: ", tourc[0].image_url);
   }, [tourc]); // Run this effect whenever tourc changes
-
 
   // const fetchTours = async (formData = null) => {
   //   console.log("ME IN FETCH TORs:--"+JSON.stringify(formData));
@@ -149,16 +149,16 @@ const UHome = () => {
   //         if (formData && Object.keys(formData).length !== 0) {
   //          if(toursData.length===0)
   //          {
-            
+
   //           setShowNotificationa(true);
   //          }
   //          else{
   //           //setShowNotification(true);
-            
+
   //         console.log("Received Response", toursData);
   //         setTours(toursData);
   //         console.log("Received Response Type", typeof toursData);
-          
+
   //       }
   //     }else{
   //       console.log("popippo");
@@ -183,19 +183,28 @@ const UHome = () => {
     console.log("ME IN UHOME *__*:-" + JSON.stringify(formData));
     fetchTours(formData);
 
-    // for(let i=0;i<tourc.length;i++)
-    // {
-    //   let jj = tourc[i];
-    //   for(let key in jj)
-    //      console.log(`${key} and value ${jj[key]}`);
-    // }
 
   };
 
   return (
     <div className={HCss.app}>
-      {showNotification && <><h3 style={{position:'absolute',left:'120px',top:'370px',margin:'0px',padding:'0px', textDecoration: 'underline',
-  textDecorationColor: '#1172D4'}}>Search Results</h3></>}
+      {showNotification && (
+        <>
+          <h3
+            style={{
+              position: "absolute",
+              left: "120px",
+              top: "370px",
+              margin: "0px",
+              padding: "0px",
+              textDecoration: "underline",
+              textDecorationColor: "#1172D4",
+            }}
+          >
+            Search Results
+          </h3>
+        </>
+      )}
       {showHeader ? (
         /* Render main content when showHeader is true */
         <>
@@ -234,11 +243,20 @@ const UHome = () => {
                   tourid={tour.tourid}
                   departure_date={tour.departure_date}
                   descreption={tour.descreption}
+                  company_id = {tour.company_id}
+                  number_of_days = {tour.number_of_days}
                 />
               ))}
-
             </div>
-            {showNotificationa && <NotificationUI message="Tour not found" onHide={hideNotificationa} position="fixed" left="700px" top="25px"/>}
+            {showNotificationa && (
+              <NotificationUI
+                message="Tour not found"
+                onHide={hideNotificationa}
+                position="fixed"
+                left="700px"
+                top="25px"
+              />
+            )}
             <section className={HCss.reviewLand} id="rvLand">
               <h3 className={HCss.h1InRv}>What Users say about us</h3>
               <ReviewSlider />

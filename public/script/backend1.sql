@@ -6,7 +6,7 @@ CREATE TABLE users (
     lname VARCHAR(50) NOT NULL,
     email VARCHAR(80) NOT NULL,
     password VARCHAR(70) NOT NULL,
-    contact_no int not null,
+    contact_no VARCHAR(20) not null,
     user_type int not null
     
 );
@@ -17,6 +17,8 @@ INSERT INTO users (fname, lname, email, password, contact_no, user_type)
 VALUES ('ahmed', 'umair', 'au@gmail.com', '1234', '0110', 0);
 
 select * from users;
+select * from user_tour_booking;
+
 
 
 ALTER TABLE users;
@@ -63,6 +65,11 @@ CREATE TABLE tour (
     FOREIGN KEY (company_id) REFERENCES tour_company(id)
 );
 
+create table user_tour_favorite(
+                user_id int,
+                tour_id int,
+                primary key(user_id,tour_id)
+);
 
 
 
@@ -78,8 +85,34 @@ ADD departure_date DATE,
 ADD number_of_days INT;
 
 
+select * from user_tour_booking;
+
+
+CREATE TABLE user_tour_booking (
+    user_id INT NOT NULL,
+    tour_id INT NOT NULL,
+    booked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    statas VARCHAR(50),
+    tourist_going INT,
+    price INT,
+    PRIMARY KEY (user_id, tour_id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (tour_id) REFERENCES tour(tourid)
+);
+
+select * from users;
+select * from user_tour_booking;
 select * from tour;
+select * from users;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ,,,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+SELECT CONSTRAINT_NAME
+FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+WHERE TABLE_NAME = 'user_tour_booking' AND CONSTRAINT_TYPE = 'FOREIGN KEY';
+
+ALTER TABLE user_tour_booking DROP FOREIGN KEY user_tour_booking_ibfk_1;
+ALTER TABLE user_tour_booking DROP FOREIGN KEY user_tour_booking_ibfk_2;
+
+delete from user_tour_booking where user_id = 6 and tour_id = 3;
 
 
-MODIFY COLUMN contact_no VARCHAR(20) NOT NULL;
-show global variables like 'PORT';
+

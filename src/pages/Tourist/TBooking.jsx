@@ -148,7 +148,7 @@ const TBooking = () => {
     const currentTimeStamp = new Date().toISOString();
     console.log("Current Date and Time: when book is clicked", currentTimeStamp);
            
-    if (touristsValue < number_of_persons) {
+    if (touristsValue <= number_of_persons) {
       updateUser((user) => ({
         ...user,
         bookedTours: [
@@ -214,37 +214,40 @@ const TBooking = () => {
     console.log("INSIDE HANDLE SUCCESS (*_*)\n");
     const currentTimeStamp = new Date().toISOString();
     console.log("Current Date and Time: when book is clicked", currentTimeStamp);
-    
+    console.log("I am in Tbooking Book Package button showing tourId "+tourId);  //line 47
+    console.log("I am in Tbooking Book Package button showing userId "+user.id);  //userid
 
-    if (touristsValue < number_of_persons) {
+
+    if (touristsValue <= number_of_persons) {
       const updatedUser = { ...user };
       updatedUser.bookedTours = updatedUser.bookedTours ?? [];
       let userid = user.id;
       let status='booked';
-      updatedUser.bookedTours.push({
-        userid,
-        tourId,
-        title,
-        image_url,
-        location,
-        price,
-        number_of_persons,
-        touristsValue,
-        totalPrice,
-        departure_date,
-        bookedAt: currentTimeStamp,
-        status: status
-      });
+      const objj = { userid: userid, tourId: tourId, title: title,price:price,number_of_persons:number_of_persons,touristsValue:touristsValue,totalPrice:totalPrice,departure_date:departure_date };
       try {                            
         const response = await fetch("http://localhost:8199/ppppp/Demo", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ...updatedUser.bookedTours, action: "bookTour" }), // Adding action property
+          body: JSON.stringify({ ...objj, action: "bookTour" }), // Adding action property
         });
       
         if (response.ok) {
+          updatedUser.bookedTours.push({
+            userid,
+            tourId,
+            title,
+            image_url,
+            location,
+            price,
+            number_of_persons,
+            touristsValue,
+            totalPrice,
+            departure_date,
+            bookedAt: currentTimeStamp, 
+            
+          });
           console.log("Success: Data sent successfula");
           console.log("USER SESSIOM<>:-__-"+JSON.stringify(user));
           // navigate("/");
@@ -254,6 +257,7 @@ const TBooking = () => {
       } catch (error) {
         console.error("Error:", error);
       }
+      console.log("Me in TBooking showing user");
       console.log(user);
       updateUser(updatedUser);
     } else {
@@ -268,13 +272,31 @@ const TBooking = () => {
 
     setSucessMsg(true);
   };
-  const cancelTour = () => {
+  const cancelTour = async () => {
     // Remove the recently pushed tour detail from bookedTours array
-    updateUser((user) => ({
-      ...user,
-      bookedTours: user.bookedTours.filter((tour) => tour.tourid !== tourid),
-    }));
-    setTourCancelled(true);
+    try {
+      // Send a POST request to the server to delete the tour
+      const response = await fetch("http://localhost:8199/ppppp/Demo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tourId: tourId, userId: user.id,action: "cancelTour" }), // Send the tourId to be deleted
+      });
+  
+      if (response.ok) {
+        // If the deletion is successful, update the user's bookedTours array
+        updateUser((user) => ({
+          ...user,
+          bookedTours: user.bookedTours.filter((tour) => tour.tourid !== tourid),
+        }));
+        setTourCancelled(true); // Set tourCancelled state to true
+      } else {
+        console.error("Error: Failed to cancel tour");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
     // Set tourCancelled state to true
   };
 
@@ -486,14 +508,15 @@ const TBooking = () => {
           >
             Congratulations tour booked Successfully
           </pre>
+        
+          <Button style={{ marginLeft: "25px" }} onClick={cancelTour}>
+            Cancel Tour
+          </Button>
           <Button
             onClick={handleDash}
-            style={{ marginTop: "30vh", marginLeft: "8px" }}
+            style={{ marginTop: "30vh", marginLeft: "35px" }}
           >
             Move to Dashboard
-          </Button>
-          <Button style={{ marginLeft: "50px" }} onClick={cancelTour}>
-            Cancel Tour
           </Button>
         </div>
       )}

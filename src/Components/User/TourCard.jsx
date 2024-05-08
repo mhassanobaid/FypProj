@@ -9,7 +9,7 @@ import NotificationUI from "../Common/NotificationUI";
 import { selectClasses } from "@mui/material";
 
 
-const TourCard = ({ title, image_url, location, price, number_of_persons, tourss, tourid,departure_date,descreption }) => {
+const TourCard = ({ title, image_url, location, price, number_of_persons, tourss, tourid,departure_date,descreption,company_id,number_of_days }) => {
   
   const navigate = useNavigate();
   const [showTooltip, setShowTooltip] = useState(false);
@@ -54,7 +54,7 @@ const TourCard = ({ title, image_url, location, price, number_of_persons, tourss
   
     // Navigate to TourDetails page with the selected tourId
     if (user) {
-      console.log("DASDaa");
+      
        user = { ...user };
        user.selectedTour = Array.isArray(user.selectedTour) ? user.selectedTour : [];
        user.selectedTour.push({
@@ -65,7 +65,9 @@ const TourCard = ({ title, image_url, location, price, number_of_persons, tourss
         number_of_persons,
         tourid,
         descreption,
-        departure_date
+        departure_date,
+        company_id
+
       });
       
 
@@ -82,11 +84,12 @@ const TourCard = ({ title, image_url, location, price, number_of_persons, tourss
 
   const handleFavoriteClick = (event) => {
     // Update the user state to add the current tour card to bookedTours
+    console.log("ME TourCard.jsx me hun aur company_id show kr rhe "+company_id);
     event.stopPropagation();
     if (user) {
       const updatedUser = { ...user };
       updatedUser.favorites = updatedUser.favorites ?? [];
-      const isTourAlreadyAdded = updatedUser.favorites.some((tour) => tour.id === tourid);
+      const isTourAlreadyAdded = updatedUser.favorites.some((tour) => tour.tourid === tourid);
       console.log(isTourAlreadyAdded);
       if(!isTourAlreadyAdded){
       updatedUser.favorites.push({
@@ -97,7 +100,9 @@ const TourCard = ({ title, image_url, location, price, number_of_persons, tourss
         number_of_persons,
         tourid,
         descreption,
-        departure_date
+        departure_date,
+        company_id,
+        number_of_days
       });
       console.log(user);
       updateUser(updatedUser);
