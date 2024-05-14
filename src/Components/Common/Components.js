@@ -19,11 +19,11 @@ background-color: #fff;
 border-radius: 10px;
 box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 position: relative;
-top: ${props => (props.top || -80)}px;
+top: ${props => (props.top || -65)}px;
 overflow: hidden;
 width: ${props => (props.width || 678)}px;
 max-width: 100%;
-min-height: 400px;
+min-height: 430px;
 right: ${props => (props.right || 0)}px;
 `;
 
@@ -345,6 +345,7 @@ export const OverlayPanel = styled.div`
 
 export const LeftOverlayPanel = styled(OverlayPanel)`
   transform: translateX(-20%);
+  margin-right: 40px;
   ${props => props.signinIn !== true ? `transform: translateX(0);` : null}
 `;
 

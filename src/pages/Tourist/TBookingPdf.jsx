@@ -114,7 +114,8 @@ const TBookingPdf = ({ tourDetails, accountDetails }) => {
       
       let userid = user.id;
       let status='booked';
-      const objj = { userid: userid, tourId: tourid, title: title,price:price,number_of_persons:number_of_persons,touristsValue:tourists_going,totalPrice:total_amount,departure_date:departure_date };
+      const objj = { image_url: image_url,userid: userid, tourId: tourid, title: title,price:price,location:location,number_of_persons:number_of_persons,touristsValue:tourists_going,totalPrice:total_amount,departure_date:departure_date };
+      
       try {                            
         const response = await fetch("http://localhost:8199/ppppp/Demo", {
           method: "POST",

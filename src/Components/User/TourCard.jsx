@@ -82,7 +82,7 @@ const TourCard = ({ title, image_url, location, price, number_of_persons, tourss
     navigate("/tourdet", { state: { TourId: tourid, Tours: tourss } });
   };
 
-  const handleFavoriteClick = (event) => {
+  const handleFavoriteClick = async(event) => {
     // Update the user state to add the current tour card to bookedTours
     console.log("ME TourCard.jsx me hun aur company_id show kr rhe "+company_id);
     event.stopPropagation();
@@ -92,18 +92,51 @@ const TourCard = ({ title, image_url, location, price, number_of_persons, tourss
       const isTourAlreadyAdded = updatedUser.favorites.some((tour) => tour.tourid === tourid);
       console.log(isTourAlreadyAdded);
       if(!isTourAlreadyAdded){
-      updatedUser.favorites.push({
-        title,
-        image_url,
-        location,
-        price,
-        number_of_persons,
-        tourid,
-        descreption,
-        departure_date,
-        company_id,
-        number_of_days
-      });
+        const obj = {   
+          userId: user.id,
+          title:title,
+          image_url:image_url,
+          location:location,
+          price:price,
+          number_of_persons:number_of_persons,
+          tourid:tourid,
+          descreption:descreption,
+          departure_date:departure_date,
+          company_id:company_id,
+          number_of_days:number_of_days};
+        try {                            
+          const response = await fetch("http://localhost:8199/ppppp/Demo", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...obj, action: "saveFavorite" }), // Adding action property
+          });
+        
+          if (response.ok) {
+            updatedUser.favorites.push({
+              title,
+              image_url,
+              location,
+              price,
+              number_of_persons,
+              tourid,
+              descreption,
+              departure_date,
+              company_id,
+              number_of_days
+            });
+          } else {
+            console.error("Error: Failed to send data");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+
+
+
+
+
       console.log(user);
       updateUser(updatedUser);
       setShowTooltip(true);

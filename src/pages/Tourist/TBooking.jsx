@@ -223,7 +223,7 @@ const TBooking = () => {
       updatedUser.bookedTours = updatedUser.bookedTours ?? [];
       let userid = user.id;
       let status='booked';
-      const objj = { userid: userid, tourId: tourId, title: title,price:price,number_of_persons:number_of_persons,touristsValue:touristsValue,totalPrice:totalPrice,departure_date:departure_date };
+      const objj = { userid: userid, tourId: tourId, title: title,price:price,location:location,number_of_persons:number_of_persons,touristsValue:touristsValue,totalPrice:totalPrice,departure_date:departure_date,image_url: image_url };
       try {                            
         const response = await fetch("http://localhost:8199/ppppp/Demo", {
           method: "POST",

@@ -18,7 +18,8 @@ VALUES ('ahmed', 'umair', 'au@gmail.com', '1234', '0110', 0);
 
 select * from users;
 select * from user_tour_booking;
-
+select * from user_tour_favorite;
+select * from tour;
 
 
 ALTER TABLE users;
@@ -71,9 +72,11 @@ create table user_tour_favorite(
                 primary key(user_id,tour_id)
 );
 
-
-
-drop table tour;
+select * from user_tour_favorite;
+select * from user_tour_booking;
+select * from tour;
+select * from users;
+drop table user;
 
 INSERT INTO tour (company_id, title, descreption,image_url,price,number_of_persons,location,number_of_days,departure_date)
 VALUES (2, 'Murree Journey', 'A journey of enjoying Murree beauty','../images/murree.jpg',200,5,'Murree',4,'2024-09-30');
@@ -100,9 +103,13 @@ CREATE TABLE user_tour_booking (
     FOREIGN KEY (tour_id) REFERENCES tour(tourid)
 );
 
-select * from users;
+ALTER TABLE user_tour_booking
+ADD COLUMN title VARCHAR(100),
+ADD COLUMN location VARCHAR(100),
+ADD COLUMN departure_date DATE;
+
 select * from user_tour_booking;
-select * from tour;
+select * from users;
 select * from users;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ,,,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
 SELECT CONSTRAINT_NAME

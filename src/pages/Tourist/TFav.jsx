@@ -15,21 +15,25 @@ import TFCSS from '../../Assets/styles/TFavCss.module.css';
 const TFav = ()=>{
 
   const { user } = useUser();
-  const favoriteTours = user?.favorites || [];
-  const bookedTours = user?.bookedTours || [];
+  let [favoriteTours, setFavoriteTours] = useState(user?.favorites || []);
+  let [bookedTours, setBookedTours] = useState(user?.bookedTours || []);
   const navigate = useNavigate();
   const loc = useLocation();
   const queryParams = new URLSearchParams(loc.search);
   const source = queryParams.get('source');
-
+  console.log(user);
+  console.log(bookedTours);
   useEffect(() => {
     if (!user || !user.selectedTour) {
       navigate('/');
     }}, [user, navigate]);
+  
+
+
   const handleAnchorClick = (tourd) => {
     console.log("ME IN TFav page"+tourd);
     // Navigate to TourDetails page with the selected tourId
-    
+        
   
       // Navigate to TourDetails page with the selected tourId
       console.log(tourd);
@@ -50,6 +54,7 @@ const wese = ()=>{
     fontWeight:'bold',
     
   }
+
 return(
 <div style={{ minHeight: '100vh', position: 'relative' }}>
 
@@ -113,11 +118,17 @@ return(
       </h3>
       <p><div style={dvSta}>Location:</div>&ensp;<div className={TFCSS.tct}>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;{tour.location}</div></p>
       <p><div style={dvSta}>Price per tourist:</div>&ensp;&ensp;<div className={TFCSS.tcts}>{tour.price}$</div></p>
-      <p><div style={dvSta}>Tourists Allowed:</div>&ensp;&nbsp;<div className={TFCSS.tcts}>{tour.number_of_persons}</div></p>
-      <p><div style={dvSta}>Tourists Going:</div>&ensp;&ensp;&ensp;&nbsp;<div className={TFCSS.tcts}>{tour.touristsValue}</div></p>
+      <p><div style={dvSta}>Tourists Going:</div>&ensp;&ensp;&ensp;&nbsp;<div className={TFCSS.tcts}>{tour.tourist_going}</div></p>
       <p><div style={dvSta}>Total Amount:</div>&ensp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;<div className={TFCSS.tcts}>{tour.totalPrice}$</div></p>
       <p><div style={dvSta}>Departure Date:</div>&ensp;&ensp;&nbsp;<div className={TFCSS.tcts}>{tour.departure_date}</div></p>
-      <p><div style={dvSta}>Booked At:</div>&ensp;&ensp;&nbsp;<div className={TFCSS.tcts}>{tour.bookedAt}</div></p>
+      <p><div style={dvSta}>Booked At:</div>&ensp;&ensp;&nbsp;&ensp;&ensp;&ensp;&ensp;<div className={TFCSS.tcts}> {new Date(tour.booked_at).toLocaleString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    })}</div></p>
       {/*      id,
       naam,
       image,

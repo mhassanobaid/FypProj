@@ -67,7 +67,81 @@ const UHome = () => {
   };
 
 
+  const fetchBookdTours = async () => {
+    
+    try {
+      const requestBodye = { action: "retrieveBookdTours", userId: user.id };
+      const response = await fetch("http://localhost:8199/ppppp/AdminUserRet", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBodye), // Sending action of 'retrieveTours'
+      });
+       console.log("RESPONSE IS :-"+response);
+      if (response.ok) {
+        console.log("Success: Retrieved tours successfully");
 
+        try {
+          const toursDatae = await response.json();
+          console.log("BOOKED TOUR FETCH ME HUN\n");
+          console.log(toursDatae);
+          console.log("\n");
+          // favoriteTours = {...favoriteTours, ...toursData};
+          // favoriteTours = favoriteTours.concat(toursData);
+          const updatedUser = { ...user, bookedTours: [...user.bookedTours, ...toursDatae] };
+          updateUser(updatedUser);
+          console.log("array of booked rha hun me\n");
+          console.log(user);
+          
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      } else {
+        console.error("Failed to retrieve tours:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching tours:", error);
+    }
+  };
+ 
+  const fetchFavTours = async () => {
+    
+    try {
+      const requestBody = { action: "retrieveFavTours", userId: user.id };
+      const response = await fetch("http://localhost:8199/ppppp/AdminUserRet", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody), // Sending action of 'retrieveTours'
+      });
+       console.log("RESPONSE IS :-"+response);
+      if (response.ok) {
+        console.log("Success: Retrieved tours successfully");
+
+        try {
+          const toursData = await response.json();
+          console.log("FAVORITE TOUR FETCH ME HUN\n");
+          console.log(toursData);
+          console.log("\n");
+          // favoriteTours = {...favoriteTours, ...toursData};
+          // favoriteTours = favoriteTours.concat(toursData);
+          const updatedUser = { ...user, favorites: [...user.favorites, ...toursData] };
+          updateUser(updatedUser);
+          console.log("array dekh rha hun me\n");
+          console.log(user);
+          
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      } else {
+        console.error("Failed to retrieve tours:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching tours:", error);
+    }
+  };
   const fetchTours = async (formData = null) => {
     console.log("ME IN FETCH TORs:--" + JSON.stringify(formData));
     try {
@@ -121,7 +195,12 @@ const UHome = () => {
     // Fetch tours from backend API
 
     fetchTours();
+    fetchFavTours();
+    
   }, []);
+  useEffect(()=>{
+    fetchBookdTours();
+  },[]);
 
   useEffect(() => {
     // Log the value of tourc when it changes

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import * as Components from "../../Components/Common/Components";
 import { useNavigate } from "react-router-dom";
 import { user, useUser } from "../../Components/User/UserContext";
@@ -25,6 +26,7 @@ import NotificationUI from "../../Components/Common/NotificationUI";
 
 const SignUp = (onViewChange) => {
   const location = useLocation();
+  
 
   let isLogin = new URLSearchParams(location.search).get("login");
   const navigate = useNavigate();
@@ -34,6 +36,17 @@ const SignUp = (onViewChange) => {
   const [showNotificationa, setShowNotificationa] = useState(false);
   const [showNotificationb, setShowNotificationb] = useState(false);
   let [signIn, toggle] = React.useState(false);
+  const countriess = [
+    {name: "Pakistan", code: "+92"},
+    { name: "United States", code: "+1" },
+    { name: "United Kingdom", code: "+44" },
+    { name: "Canada", code: "+1" },
+    { name: "Australia", code: "+61" },
+    // Add more countries as needed
+  ];
+  const [selectedCountry, setSelectedCountry] = useState(countriess[0]);
+  const [phoneNumber, setPhoneNumber] = useState(+92);
+  const [errorMessag, setErrorMessag] = useState('');
   // console.log('HEER'+isLogin);
 
   useEffect(() => {
@@ -50,7 +63,19 @@ const SignUp = (onViewChange) => {
     email: "",
     password: "",
     phone: "",
+    selectedCountry: countriess[0],
   });
+  useEffect(() => {
+    const formattedPhoneNumber = formData.phone.trim();
+    const selectedCode = formData.selectedCountry.code;
+    const existingCode = formData.phone.split(' ')[0];
+    const defaultPhoneNumber = `${formData.selectedCountry.code} ${formData.phone.replace(/^\s*|\s*$/g, '')}`;
+    if (!formData.phone.startsWith(formData.selectedCountry.code)) {
+      setFormData(prevState => ({ ...prevState, phone: defaultPhoneNumber }));
+    }
+  }, [formData.selectedCountry]);
+
+  
   const hideNotification = () => {
     setShowNotification(false);
   };
@@ -61,9 +86,37 @@ const SignUp = (onViewChange) => {
     setShowNotificationb(false);
   };
 
+  
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    let newErrorMessage = '';
+    if (!formData.firstname || !formData.lastname || !formData.email || !formData.password || !phoneNumber) {
+      newErrorMessage = 'All fields are required.';
+    } else {
+      const nameRegex = /^[a-zA-Z\s]*$/;
+      if (!nameRegex.test(formData.firstname) || !nameRegex.test(formData.lastname)) {
+        newErrorMessage = 'Name fields should not contain special characters or numbers.';
+      } else {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+          newErrorMessage = 'Please enter a valid email address.';
+        } else {
+          if (formData.password.length < 8) {
+            newErrorMessage = 'Password should be at least 8 characters long.';
+          } else {
+            const phoneRegex = /^\+?\d*$/;
+            if (!phoneRegex.test(phoneNumber)) {
+              newErrorMessage = 'Phone number should contain only digits.';
+            }
+          }
+        }
+      }
+    }
+
+    setErrorMessag(newErrorMessage);
+    if (!newErrorMessage) {
     try {                            
       const response = await fetch("http://localhost:8199/ppppp/Demo", {
         method: "POST",
@@ -118,6 +171,13 @@ const SignUp = (onViewChange) => {
     } catch (error) {
       console.error("Error:", error);
     }
+  }
+  else
+  {
+    setTimeout(() => {
+      setErrorMessag('');
+    }, 4000);
+  }
   };
   const validateForm = () => {
     const errors = {};
@@ -200,9 +260,29 @@ const SignUp = (onViewChange) => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const handleChangeP = (e) => {
+    setPhoneNumber(e.target.value); // Update the phone number as the user types
+  };
+  const handleCountryChange = (e) => {
+    const selectedCountry = countriess.find(country => country.name === e.target.value);
+    //const formattedPhoneNumber = `${selectedCountry.code} ${formData.phone.replace(/^\s*|\s*$/g, '')}`;
+//    setFormData({ ...formData, selectedCountry });
+    setSelectedCountry(selectedCountry);
+    setPhoneNumber(selectedCountry.code);
+  };
+  const formatPhoneNumber = (phoneNumber, countryCode) => {
+    // Remove any whitespace from phone number
+    const formattedPhoneNumber = formData.phone.trim();
+    // Replace the country code in the phone number with the newly selected country code
+    return formattedPhoneNumber.replace(/^\+\d+/, countryCode);
+  };
+
 
   return (
     <div className={SUCss.body}>
+       {errorMessag && (
+        <p style={{ color: 'red',position:'absolute',top:'160px',left:'690px',fontWeight:'bold',fontSize:'20px', whiteSpace: 'nowrap',zIndex:'10000' }}>{errorMessag}</p>
+      )}    
       {showNotification && (
         <NotificationUI
           message="Tour already added to Favorite."
@@ -286,21 +366,24 @@ const SignUp = (onViewChange) => {
             <Components.SignUpContainer signinIn={signIn}>
               <Components.Form>
                 <Components.Title>Create Account</Components.Title>
-                <PersonIcon style={{position:'absolute',left:'30px',top:'137px'}} fontSize="small"/>
+                     
+                <PersonIcon style={{position:'absolute',left:'30px',top:'145px'}} fontSize="small"/>
                 <Components.Input
                   type="text"
                   placeholder="First Name"
                   name="firstname"
                   onChange={handleChange}
                 />
-                <PersonIcon style={{position:'absolute',left:'30px',top:'83px'}} fontSize="small"/>
+                
+                <PersonIcon style={{position:'absolute',left:'30px',top:'84px'}} fontSize="small"/>
                 <Components.Input
                   type="text"
                   placeholder="Last Name"
                   name="lastname"
                   onChange={handleChange}
                 />
-                <EmailIcon style={{position:'absolute',left:'30px',top:'194px'}} fontSize="small"/>
+                 
+                <EmailIcon style={{position:'absolute',left:'30px',top:'195px'}} fontSize="small"/>
                 <Components.Input
                   type="email"
                   placeholder="Email"
@@ -308,21 +391,31 @@ const SignUp = (onViewChange) => {
                   name="email"
                   onChange={handleChange}
                 />
+            
                 
-                <PasswordIcon style={{position:'absolute',left:'30px',top:'246px'}} fontSize="small"/>
+                <PasswordIcon style={{position:'absolute',left:'30px',top:'250px'}} fontSize="small"/>
                 <Components.Input
                   type="password"
                   placeholder="Password"
                   name="password"
                   onChange={handleChange}
                 />
-                <PhoneIcon style={{position:'absolute',left:'30px',top:'301px'}} fontSize="small"/>
+              
+                
+                <PhoneIcon style={{position:'absolute',left:'30px',top:'320px'}} fontSize="small"/>
+                <select value={selectedCountry.name} onChange={handleCountryChange} style={{position:'relative',top:'1px',left:'-50px',width:'107px'}}>
+        {countriess.map((country, index) => (
+          <option key={index} value={country.name}>{`${country.name} ${country.code}`}</option>
+        ))}
+      </select>
                 <Components.Input
                   type="tel"
                   placeholder="Phone Number"
                   name="phone"
-                  onChange={handleChange}
+                  value={phoneNumber}
+                  onChange={handleChangeP}
                 />
+              
                 <Components.Button onClick={handleSubmit}>
                   Sign Up
                 </Components.Button>
@@ -332,6 +425,7 @@ const SignUp = (onViewChange) => {
 
           <Components.OverlayContainer signinIn={signIn}>
             <Components.Overlay signinIn={signIn}>
+              
               <Components.LeftOverlayPanel signinIn={signIn}>
                 <Components.Title>Welcome User!</Components.Title>
                 <Components.Paragraph>
@@ -345,7 +439,7 @@ const SignUp = (onViewChange) => {
                   Sign In
                 </Components.GhostButton>
               </Components.LeftOverlayPanel>
-
+              
               <Components.RightOverlayPanel signinIn={signIn}>
                 <Components.Title>Hello, User!</Components.Title>
                 <Components.Paragraph>
