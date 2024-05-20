@@ -87,3 +87,13 @@
   bottom:95px;
   left: 110px;
 }
+.notificationCircle {
+  width: 30px;
+  height: 30px;
+  background-color: lightcoral;
+  border-radius: 50%;
+  position: absolute;
+  top: -65px;
+  left: 108px;
+  z-index: 0; /* Ensure the circle is behind the icon */
+}

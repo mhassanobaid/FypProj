@@ -9,6 +9,21 @@
     font-weight: bold;
   }
 }
+
+.tooltiptexte
+{
+  
+  background-color: red;
+  border-radius: 50%; /* Make it a circle */
+  width: 30px; /* Adjust width as needed */
+  height: 30px;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  position: relative;
+  left:600px;
+  top:-105px;
+}
 .insiDv {
   
   width: 300px;

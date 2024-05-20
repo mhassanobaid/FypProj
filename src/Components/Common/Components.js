@@ -485,6 +485,10 @@ export const TourCardd = styled.div`
   background-color: #f0f0f0;
   border-radius: 10px;
     padding:10px;
-  width: 280px;
+  width: ${props => (props.width ? props.width : "280px")};
+  height: ${props => (props.height ? props.height : "unset")};
   margin-top: 5px;
+  margin-top: ${props => (props.marginTop ? props.marginTop : "unset")};
+  margin-left: ${props => (props.marginLeft ? props.marginLeft : "unset")};
+  
 `;

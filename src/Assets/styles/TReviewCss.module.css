@@ -1,0 +1,26 @@
+.packageText {
+  display: inline;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding-top: 40px;
+  text-decoration: underline;
+  text-decoration-color: #1172D4;
+  position: absolute;
+  top:130px;
+  left:240px
+}
+
+.textDiv {
+  margin: 0;
+  padding: 0;
+  
+}
+.tct {
+  display: inline;
+
+}
+.tcts{
+  display: inline;
+  font-weight: bold;
+}

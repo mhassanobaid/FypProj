@@ -7,6 +7,7 @@ import {
   Button,
   SlideShowContainer,
 } from "../../Components/Common/Components";
+import { FaStar } from 'react-icons/fa';
 import logo from "../../Assets/images/logo.png";
 import Mapp from "../../Assets/images/map.jpg";
 import Footer from "../../Components/Common/Footer";
@@ -15,12 +16,13 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../Components/User/UserContext";
 import ImageSlideshow from "../../Components/Common/ImageSlideshow";
 import NotificationUI from "../../Components/Common/NotificationUI";
+import Map from '../User/Map';
 
 const UTourDetails = () => {
   const { user, updateUser } = useUser();
   const navigate = useNavigate();
   const loc = useLocation();
-
+  const [reviews, setReviews] = useState([]);
 
   
 
@@ -49,7 +51,7 @@ const UTourDetails = () => {
 
 
   const [TCompData, setTCompData] = useState([]);
-  const [tourCmp, setTourCmp] = useState({});
+  const [tourCmp, setTourCmp] = useState(null);
  
   const selectedTour = fromFav
     ? favoritess.find((tour) => tour.tourid === tourId)
@@ -77,7 +79,7 @@ const UTourDetails = () => {
   };
 
  
-
+ 
                     
   async function fetchTComp() {
     console.log("ME IN FETCH TComp:--" + JSON.stringify(TCompData));
@@ -97,6 +99,7 @@ const UTourDetails = () => {
           const tourCompaniesData = await response.json();
           console.log(tourCompaniesData);
           setTCompData(tourCompaniesData);
+          console.log('lkapio'+company_id);
           setTourCompany(company_id);
           //TCompData
         
@@ -122,12 +125,91 @@ const UTourDetails = () => {
                         // Log the value of tourc when it changes
                         fetchTComp();
                         setTourCompany(company_id);
-                      }, tourCmp); 
+                        // 
+                       
+                      }, tourCmp);
+                      
+                      /*   fetch("http://localhost:8199/ppppp/AdminUserRet", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            action: "retrieveCompanyName",
+            tourid: toursNeedingReview[0].tourid,
+            userid: user.id
+          })
+        }) */
+                      useEffect(() => {
+                        console.log("nmna");
+                        if (tourCmp?.id) {
+                          fetch("http://localhost:8199/ppppp/Demo", {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                              action: "fetchReview",
+                              companyId: tourCmp.id,
+                            })
+                          })
+                            .then((response) => response.json())
+                            .then((data) => {
+                              setReviews(data);
+                              //console.log(reviews);
+                            })
+                            .catch((error) => {
+                              console.error("Error fetching reviews:", error);
+                            });
+                        }
+                      }, [tourCmp]);
+
+
+
+
+
+                      const renderStars = (rating) => {
+                        const stars = [];
+                        for (let i = 0; i < 5; i++) {
+                          stars.push(
+                            <FaStar key={i} color={i < rating ? "gold" : "lightgray"} />
+                          );
+                        }
+                        return stars;
+                      };
+
+
                       // useEffect(() => {
                       //   // Update tourCmp when company_id changes
                       //   setTourCompany(company_id);
                         
                               
+
+
+
+
+                      // useEffect(() => {
+                      //   fetch("http://localhost:8199/AdminUserRet", {
+                      //     method: "POST",
+                      //     headers: {
+                      //       "Content-Type": "application/json",
+                      //     },
+                      //     body: JSON.stringify({ 
+                      //       action: "fetchReview",
+                      //       companyId:tourCmp.id
+                      //      }),
+                      //   })
+                      //     .then((response) => response.json())
+                      //     .then((data) => {
+                      //       setReviews(data);
+                      //       console.log(reviews);
+                      //     })
+                      //     .catch((error) => {
+                      //       console.error("Error fetching reviews:", error);
+                      //     });
+                      // }, [tourCmp.id]);
+
+
                       // }, [company_id]); 
 
   // console.log("tours aarray \n\n");
@@ -210,21 +292,24 @@ if (!isNaN(departureDate.getTime())) {
     console.log(currentDateString);
     // Check if current date is less than or equal to departure date and tourists is greater than 1
     if (user) {
-      console.log("I am in book package button \n" + tourId);
+      console.log("I am in book package button \n" + number_of_days);
       console.log(user);
       if (number_of_persons >= 1) {
         // Assuming you have a route named '/account-details'
 
         if (selectedTour) {
           const isTourAlreadyBooked = user.bookedTours.some(
-            (tour) => tour.tourId === tourid
+            (tour) => tour.tourid === tourid
           );
           console.log(isTourAlreadyBooked + "jh");
           // Update user context with selected tour details
           if (!isTourAlreadyBooked) {
             updateUser({
               ...user,
-              selectedTour: {
+              selectedTour: Array.isArray(user.selectedTour) ? [
+                
+                {
+                 /*selectedTour: {
                 tourid: tourId,
                 title: selectedTour.title,
                 location: selectedTour.location,
@@ -232,10 +317,35 @@ if (!isNaN(departureDate.getTime())) {
                 number_of_persons: selectedTour.number_of_persons,
                 image_url: selectedTour.image_url,
                 departure_date: selectedTour.departure_date,
-                descreption: selectedTour.descreption,
-
+                descreption: selectedTour.descreption, */
+                  userid: user.id,
+                  tourid: tourId,
+                  title: title,
+                  location: location,
+                  price: price,
+                  number_of_persons: number_of_persons,
+                  image_url: image_url,
+                  departure_date: departure_date,
+                  descreption: descreption,
+                  company_id : company_id,
+                  number_of_day: number_of_days
+                  // Add other tour details as needed
+                },
+              ] : [{
+                userid: user.id,
+                  tourid: tourId,
+                  title: title,
+                  location: location,
+                  price: price,
+                  number_of_persons: number_of_persons,
+                  image_url: image_url,
+                  departure_date: departure_date,
+                  descreption: descreption,
+                  company_id : company_id,
+                  number_of_day: number_of_days
                 // Add other tour details as needed
-              },
+              }]
+              
             });
             console.log("KONSE TOUR ME HN"+tourId);
             navigate("/tbooking", { state: { tourCmp, tourId } });
@@ -304,7 +414,11 @@ if (!isNaN(departureDate.getTime())) {
     marginLeft: "-68px",
     display: "inline",
   };
-
+  const appContainerrStyle = {
+    position: 'relative',
+    width: '100%',
+    height: '100vh', // Adjust height as needed
+  };
   return (
     <div style={{ height: "130vh" }}>
       <SlideShowContainer>
@@ -315,8 +429,23 @@ if (!isNaN(departureDate.getTime())) {
         <img src={logo} alt="" />
       </TourDetLogo>
       <LinkList />
+      <div style={{ position: "absolute", top: "180px", right: "0", width: "20%", maxHeight: "400px", overflowY: "scroll", padding: "10px", border: "1px solid #ddd", borderRadius: "4px" }}>
+      <h3 style={{textDecoration:'underline',textDecorationColor:'#1174D4'}} >Tour Reviews of <span>{tourCmp && tourCmp.company_name}</span></h3>
+      {reviews.length > 0 ? (
+        reviews.map((review, index) => (
+          <div key={index} style={{ marginBottom: "10px", padding: "10px", border: "1px solid #ccc", borderRadius: "30px", width: "100%", boxSizing: "border-box" }}>
+            <p><strong>Tour :</strong> {review.tourTitle}</p>
+            <p><strong>Tourist:</strong> {review.userFullName}</p>
+            <p><strong>Rating:</strong> {renderStars(review.rating)}</p>
+            <p><strong>Comment:</strong> {review.comments}</p>
+          </div>
+        ))
+      ) : (
+        <p>No reviews available.</p>
+      )}
+    </div>
       {/* width="20vw" height="30vh" color="skyblue" pos="relative" left="-500px" top="60px" */}
-      <a
+      {/* <a
         href="https://www.google.com/maps/place/Murree,+Rawalpindi,+Punjab,+Pakistan/@33.9037852,73.3547466,13z/data=!3m1!4b1!4m6!3m5!1s0x38dfd715776097a9:0x17b2e1d6bfb8e190!8m2!3d33.9069576!4d73.3943017!16zL20vMDQwaDFq?entry=ttu"
         target="_blank"
       >
@@ -325,7 +454,8 @@ if (!isNaN(departureDate.getTime())) {
             <div style={slideSty}></div>
           </div>
         </div>
-      </a>
+      </a> */}
+       <Map location={location} />   
       <div style={textDiv}>
         <h4 style={packageText}>Package Detail</h4>
       </div>
@@ -355,7 +485,7 @@ if (!isNaN(departureDate.getTime())) {
               style={{
                 fontSize: "0.6em",
                 verticalAlign: "sub",
-                fontFamily: "times new roman",
+                fontFamily: "Roboto",
               }}
             >
               {tourCmp && tourCmp.company_name}

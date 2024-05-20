@@ -27,6 +27,7 @@ import Wese from './pages/User/Wese';
 import SignUpForm from './Components/TourCompany/TCSignUp'
 import TCAddTour from './Components/TourCompany/TCAddTour'
 import TCSignUp from './Components/TourCompany/TCSignUp'
+import TReview from './pages/Tourist/TReview';
 //zubair woriking
 function App() {
 
@@ -56,7 +57,7 @@ function App() {
             <Route path="/tCAddTour" element={<TCAddTour/>} />
             <Route path="/tCSignUp" element={<TCSignUp/>} />
             <Route path="/adminHome" element={<Main/>} />
-            
+            <Route path="/review" element={<TReview/>} />
           </Routes>
           </UserProvider>
         </BrowserRouter>

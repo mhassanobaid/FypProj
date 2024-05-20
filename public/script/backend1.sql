@@ -17,11 +17,13 @@ INSERT INTO users (fname, lname, email, password, contact_no, user_type)
 VALUES ('ahmed', 'umair', 'au@gmail.com', '1234', '0110', 0);
 
 select * from users;
+DELETE FROM users WHERE id = 23;
+
 select * from user_tour_booking;
 select * from user_tour_favorite;
 select * from tour;
 
-
+set innodb_lock_wait_timeout=100;
 ALTER TABLE users;
 CREATE TABLE tour_company (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -83,13 +85,13 @@ VALUES (2, 'Murree Journey', 'A journey of enjoying Murree beauty','../images/mu
 
 select * from tour;
 
-ALTER TABLE tour
-ADD departure_date DATE,
-ADD number_of_days INT;
+ALTER TABLE user_tour_review
+ADD rating int,
+ADD comments text;
 
 
-select * from user_tour_booking;
-
+select * from user_tour_review;
+select * from users;
 
 CREATE TABLE user_tour_booking (
     user_id INT NOT NULL,
@@ -104,13 +106,23 @@ CREATE TABLE user_tour_booking (
 );
 
 ALTER TABLE user_tour_booking
-ADD COLUMN title VARCHAR(100),
-ADD COLUMN location VARCHAR(100),
-ADD COLUMN departure_date DATE;
-
-select * from user_tour_booking;
+ADD COLUMN number_of_persons int;
 select * from users;
-select * from users;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ,,,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+select * from tour;
+select * from tour_company;
+select * from user_tour_favorite;
+select * from user_tour_booking;
+CREATE TABLE user_tour_review (
+    reviewid INT AUTO_INCREMENT PRIMARY KEY,
+    userid INT,
+    tourid INT
+);
+
+ALTER TABLE user_tour_booking
+CHANGE number_of_persons number_of_days int;
+
+select * from tour_company;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ,,,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
 SELECT CONSTRAINT_NAME
 FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS

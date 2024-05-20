@@ -45,8 +45,9 @@ const SignUp = (onViewChange) => {
     // Add more countries as needed
   ];
   const [selectedCountry, setSelectedCountry] = useState(countriess[0]);
-  const [phoneNumber, setPhoneNumber] = useState(+92);
+  const [phoneNumber, setPhoneNumber] = useState('+92');
   const [errorMessag, setErrorMessag] = useState('');
+  const [errorMessagee, setErrorMessagee] = useState('');
   // console.log('HEER'+isLogin);
 
   useEffect(() => {
@@ -92,14 +93,21 @@ const SignUp = (onViewChange) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrorMessage = '';
-    if (!formData.firstname || !formData.lastname || !formData.email || !formData.password || !phoneNumber) {
+    if (!formData.firstname || !formData.lastname || !formData.email || !formData.password || !phoneNumber ) {
       newErrorMessage = 'All fields are required.';
-    } else {
+    }
+    else if(!formData.phone)
+      {
+        newErrorMessage = 'All fields are required.';
+      }
+   
+     else {
+      
       const nameRegex = /^[a-zA-Z\s]*$/;
       if (!nameRegex.test(formData.firstname) || !nameRegex.test(formData.lastname)) {
         newErrorMessage = 'Name fields should not contain special characters or numbers.';
       } else {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[a-zA-Z0-9]+@gmail\.com$/;
         if (!emailRegex.test(formData.email)) {
           newErrorMessage = 'Please enter a valid email address.';
         } else {
@@ -110,6 +118,11 @@ const SignUp = (onViewChange) => {
             if (!phoneRegex.test(phoneNumber)) {
               newErrorMessage = 'Phone number should contain only digits.';
             }
+            if(!(/^\+\d{12,}$/.test(formData.phone)))
+              {
+                console.log(formData.phone);
+                  newErrorMessage = 'Phone must be 10 digits';
+              }
           }
         }
       }
@@ -160,6 +173,7 @@ const SignUp = (onViewChange) => {
           bookedTours: [],
           favorites: [],
           selectedTour: [],
+          prefered: {},
         });
         console.log(fulname);
         console.log("ME form ke fieds hun"+formData);
@@ -167,6 +181,12 @@ const SignUp = (onViewChange) => {
         navigate("/");
       } else {
         console.error("Error: Failed to send data");
+        const errorMessage = await response.text(); 
+        setErrorMessagee('Email already exists');
+        
+        setTimeout(() => {
+          setErrorMessagee('');
+        }, 4000);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -176,6 +196,7 @@ const SignUp = (onViewChange) => {
   {
     setTimeout(() => {
       setErrorMessag('');
+      setErrorMessagee('');
     }, 4000);
   }
   };
@@ -236,6 +257,7 @@ const SignUp = (onViewChange) => {
             bookedTours: [],
             favorites: [],
             selectedTour: [],
+            prefered: {},
           });
           console.log("USER SESSION:--__--"+JSON.stringify(user));
           navigate("/");
@@ -261,7 +283,12 @@ const SignUp = (onViewChange) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleChangeP = (e) => {
-    setPhoneNumber(e.target.value); // Update the phone number as the user types
+    setPhoneNumber(e.target.value);
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      phone: e.target.value
+  }));
+     // Update the phone number as the user types
   };
   const handleCountryChange = (e) => {
     const selectedCountry = countriess.find(country => country.name === e.target.value);
@@ -282,7 +309,10 @@ const SignUp = (onViewChange) => {
     <div className={SUCss.body}>
        {errorMessag && (
         <p style={{ color: 'red',position:'absolute',top:'160px',left:'690px',fontWeight:'bold',fontSize:'20px', whiteSpace: 'nowrap',zIndex:'10000' }}>{errorMessag}</p>
-      )}    
+      )}
+       {errorMessagee && (
+        <p style={{ color: 'red',position:'absolute',top:'160px',left:'690px',fontWeight:'bold',fontSize:'20px', whiteSpace: 'nowrap',zIndex:'20000' }}>{errorMessagee}</p>
+      )}       
       {showNotification && (
         <NotificationUI
           message="Tour already added to Favorite."
@@ -403,7 +433,7 @@ const SignUp = (onViewChange) => {
               
                 
                 <PhoneIcon style={{position:'absolute',left:'30px',top:'320px'}} fontSize="small"/>
-                <select value={selectedCountry.name} onChange={handleCountryChange} style={{position:'relative',top:'1px',left:'-50px',width:'107px'}}>
+                <select value={selectedCountry.name} onChange={handleCountryChange} style={{position:'relative',top:'1px',left:'-50px',width:'127px'}} required>
         {countriess.map((country, index) => (
           <option key={index} value={country.name}>{`${country.name} ${country.code}`}</option>
         ))}

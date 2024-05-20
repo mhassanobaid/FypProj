@@ -12,6 +12,7 @@ import {
   Roomicon1,
   BookingDet,
 } from "../../Components/Common/Components";
+
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import logo from "../../Assets/images/logo.png";
@@ -43,8 +44,8 @@ const TBooking = () => {
   const [showNotificationb, setShowNotificationb] = useState(false);
   const [showAccountDetails, setShowAccountDetails] = useState(false);
   const loc = useLocation();
-  const { tourCmp } = loc.state || {}; 
-  const {tourId} = loc.state|| 0;
+  const { tourCmp } = loc.state || {};
+  const { tourId } = loc.state || 0;
 
   // console.log("ME in TBooking me hn tour compny"+JSON.stringify(tourCmp)+"\n"+"Tour id jo chl rhe"+tourId);
   // console.log("ME AYA FROM TOURDET"+JSON.stringify(tourCmp));
@@ -62,25 +63,45 @@ const TBooking = () => {
     return null;
   };
   // Redirect to home if user is not authenticated or selectedTour is not available
-                            // useEffect(() => {
-                            //   if (!user || !user.selectedTour) {
-                            //     navigate("/");
-                            //   }
-                            // }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user || !user.selectedTour) {
+  //     navigate("/");
+  //   }
+  // }, [user, navigate]);
 
-
-                            useEffect(() => {
-                              // Redirect to home page if user is not defined or selectedTour is not available
-                              if (!user?.selectedTour) {
-                                navigate("/");
-                              }
-                            }, [user, navigate]);
-                          
-                            if (!user?.selectedTour) {
-                              // If user or selectedTour is not defined, return null or any other component
-                              return null;
-                            }
-
+  useEffect(() => {
+    // Redirect to home page if user is not defined or selectedTour is not available
+    if (!user?.selectedTour) {
+      navigate("/");
+    }
+    console.log(user);
+  }, [user, navigate]);
+ 
+  if (!user?.selectedTour) {
+    // If user or selectedTour is not defined, return null or any other component
+    return null;
+  }
+/*   title:title,
+            image_url:image_url,
+            location:location,
+            price:price,
+            number_of_persons:number_of_persons,
+            tourid:tourid,
+            descreption:descreption,
+            departure_date:departure_date,
+            company_id:company_id */
+            console.log("Me Tboking k shru me hn"+tourId);
+            const selecteddTour = user.selectedTour.find((tour) => tour.tourid === tourId);
+              
+            /* userid: user.id,
+                  tourid: tourId,
+                  title: selectedTour.title,
+                  location: selectedTour.location,
+                  price: selectedTour.price,
+                  number_of_persons: selectedTour.number_of_persons,
+                  image_url: selectedTour.image_url,
+                  departure_date: selectedTour.departure_date,
+                  descreption: selectedTour.descreption, */
   const {
     tourid,
     title,
@@ -90,7 +111,10 @@ const TBooking = () => {
     number_of_persons,
     departure_date,
     descreption,
-  } = user.selectedTour;
+    company_id,
+    number_of_day
+  } = selecteddTour??{};
+  console.log("ME TBooking me hun (-_-)-_-("+number_of_day);
   const totalPrice = price * touristsValue;
   // Company account details (replace with actual details)
   const companyAccountDetails = {
@@ -146,40 +170,56 @@ const TBooking = () => {
   const handleConfirmBookingOne = () => {
     console.log("INSIDE CONFIRM BOOKING ONE (*_*)\n");
     const currentTimeStamp = new Date().toISOString();
-    console.log("Current Date and Time: when book is clicked", currentTimeStamp);
-           
+    console.log(
+      "Current Date and Time: when book is clicked",
+      currentTimeStamp
+    );
+
     if (touristsValue <= number_of_persons) {
       updateUser((user) => ({
         ...user,
-        bookedTours: [
-          ...user.bookedTours,
-          {
+        prefered: {
+          // Add or update keys and values as needed
+        /* userid: user.id,
             tourid: tourId,
-            title: user.selectedTour.title,
-            location: user.selectedTour.location,
-            price: user.selectedTour.price,
-            number_of_persons: user.selectedTour.number_of_persons,
-            image_url: user.selectedTour.image_url,
+            title: title, // Using the correct local variables
+            location: location, // Using the correct local variables
+            image_url: image_url, // Using the correct local variables
             tourists_going: touristsValue,
             total_amount: totalPrice,
             departure_date: departure_date,
+            bookedAt: currentTimeStamp,
+            price: price,
             descreption: descreption,
-            bookedAt: currentTimeStamp 
-            // Add other tour details as needed
-          },
-        ],
+            company_id: company_id,
+            number_of_persons: number_of_persons, */
+          
+          // Add other key-value pairs as needed
+          userid: user.id,
+          tourid: tourId,
+          title: title, // Using the correct local variables
+          location: location, // Using the correct local variables
+          image_url: image_url, // Using the correct local variables
+          tourists_going: touristsValue,
+          total_amount: totalPrice,
+          departure_date: departure_date,
+          bookedAt: currentTimeStamp,
+          price: price,
+          descreption: descreption,
+          company_id: company_id,
+          number_of_persons: number_of_persons,
+          number_of_days: number_of_day
+        }
       }));
-      console.log("Me in TBooking aur tourist jo ja rhe\n"+touristsValue);
+      console.log("Me in TBooking aur tourist jo ja rhe\n" + touristsValue);
       console.log(user);
-      for(let i=0;i<user.length;i++)
-      {
-        let ojk = user[i];
-        for(const key in ojk)
-           console.log(`${key}: ${ojk[key]}`);
-      }
-      console.log("JKJKJ REHEXTION "+tourid);
+      // for (let i = 0; i < user.length; i++) {
+      //   let ojk = user[i];
+      //   for (const key in ojk) console.log(`${key}: ${ojk[key]}`);
+      // }
+      console.log("JKJKJ REHEXTION " + tourid);
       navigate("/tbookprint", {
-        state: { tourCmp, BookTourId: tourid }
+        state: { tourCmp, BookTourId: tourid },
       });
     } else {
       setShowNotificationa(true);
@@ -188,7 +228,7 @@ const TBooking = () => {
       setConfirmed(false);
       setShowTourists(true);
       setShowGoingTourist(false);
-      
+
       return;
     }
   };
@@ -209,22 +249,39 @@ const TBooking = () => {
       alert("Please login first");
     } */
   }
-  const handleSuccess = async() => {
-    
+  const handleSuccess = async () => {
     console.log("INSIDE HANDLE SUCCESS (*_*)\n");
     const currentTimeStamp = new Date().toISOString();
-    console.log("Current Date and Time: when book is clicked", currentTimeStamp);
-    console.log("I am in Tbooking Book Package button showing tourId "+tourId);  //line 47
-    console.log("I am in Tbooking Book Package button showing userId "+user.id);  //userid
-
+    console.log(
+      "Current Date and Time: when book is clicked",
+      currentTimeStamp
+    );
+    console.log(
+      "I am in Tbooking Book Package button showing tourId " + tourId
+    ); //line 47
+    console.log(
+      "I am in Tbooking Book Package button showing userId " + user.id
+    ); //userid
 
     if (touristsValue <= number_of_persons) {
       const updatedUser = { ...user };
       updatedUser.bookedTours = updatedUser.bookedTours ?? [];
       let userid = user.id;
-      let status='booked';
-      const objj = { userid: userid, tourId: tourId, title: title,price:price,location:location,number_of_persons:number_of_persons,touristsValue:touristsValue,totalPrice:totalPrice,departure_date:departure_date,image_url: image_url };
-      try {                            
+      let status = "booked";
+      const objj = {
+        userid: userid,
+        tourId: tourId,
+        title: title,
+        price: price,
+        location: location,
+        number_of_persons: number_of_persons,
+        touristsValue: touristsValue,
+        totalPrice: totalPrice,
+        departure_date: departure_date,
+        image_url: image_url,
+        number_of_days: number_of_day
+      };
+      try {
         const response = await fetch("http://localhost:8199/ppppp/Demo", {
           method: "POST",
           headers: {
@@ -232,24 +289,26 @@ const TBooking = () => {
           },
           body: JSON.stringify({ ...objj, action: "bookTour" }), // Adding action property
         });
-      
+
         if (response.ok) {
           updatedUser.bookedTours.push({
-            userid,
-            tourId,
-            title,
-            image_url,
-            location,
-            price,
-            number_of_persons,
-            touristsValue,
-            totalPrice,
-            departure_date,
-            bookedAt: currentTimeStamp, 
-            
+            userid: userid,
+            tourid: tourId,
+            title: title,
+            image_url: image_url,
+            location: location,
+            tourists_going: touristsValue,
+            total_amount: totalPrice,
+            departure_date: departure_date,
+            bookedAt: currentTimeStamp,
+            price: price,
+            number_of_days: number_of_day
+         
+           
           });
           console.log("Success: Data sent successfula");
-          console.log("USER SESSIOM<>:-__-"+JSON.stringify(user));
+          console.log("USER SESSIOM<>:-__-\n");
+        console.log(user);
           // navigate("/");
         } else {
           console.error("Error: Failed to send data");
@@ -281,15 +340,25 @@ const TBooking = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ tourId: tourId, userId: user.id,action: "cancelTour" }), // Send the tourId to be deleted
+        body: JSON.stringify({
+          tourId: tourId,
+          userId: user.id,
+          touristGoing: touristsValue,
+          action: "cancelTour",
+        }), // Send the tourId to be deleted
       });
-  
+
       if (response.ok) {
         // If the deletion is successful, update the user's bookedTours array
         updateUser((user) => ({
           ...user,
-          bookedTours: user.bookedTours.filter((tour) => tour.tourid !== tourid),
+          bookedTours: user.bookedTours.filter(
+            (tour) => tour.tourid !== tourId
+          ),
         }));
+
+        console.log(user);
+
         setTourCancelled(true); // Set tourCancelled state to true
       } else {
         console.error("Error: Failed to cancel tour");
@@ -407,7 +476,7 @@ const TBooking = () => {
                     type="number"
                     value={touristsValue}
                     onChange={handleInput}
-                    onInput={handleInputChange}
+                    
                     // Use min attribute to set the minimum value to 0
                     min="1"
                     style={{
@@ -508,7 +577,7 @@ const TBooking = () => {
           >
             Congratulations tour booked Successfully
           </pre>
-        
+
           <Button style={{ marginLeft: "25px" }} onClick={cancelTour}>
             Cancel Tour
           </Button>
@@ -563,7 +632,7 @@ const TBooking = () => {
           />
         </>
       )}
-{showNotificationb && (
+      {showNotificationb && (
         <>
           <NotificationUI
             message="Please don't exceed the limit of tourists for this package"

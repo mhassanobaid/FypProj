@@ -58,15 +58,25 @@ const TourCard = ({ title, image_url, location, price, number_of_persons, tourss
        user = { ...user };
        user.selectedTour = Array.isArray(user.selectedTour) ? user.selectedTour : [];
        user.selectedTour.push({
-        title,
-        image_url,
-        location,
-        price,
-        number_of_persons,
-        tourid,
-        descreption,
-        departure_date,
-        company_id
+        /*   userid: user.id,
+            tourid: tourId,
+            title: user.selectedTour.title,
+            location: user.selectedTour.location,
+            image_url: user.selectedTour.image_url,
+            tourists_going: touristsValue,
+            total_amount: totalPrice,
+            departure_date: departure_date,
+            bookedAt: currentTimeStamp,
+            price: price */
+            title:title,
+            image_url:image_url,
+            location:location,
+            price:price,
+            number_of_persons:number_of_persons,
+            tourid:tourid,
+            descreption:descreption,
+            departure_date:departure_date,
+            company_id:company_id
 
       });
       
@@ -175,20 +185,24 @@ const TourCard = ({ title, image_url, location, price, number_of_persons, tourss
                 </div>
               </a>
             </div>
-
-            <p>
-              <div class={TCCss.insidecardtext}>Location:</div>
-              <div className={TCCss.dataComingToCard}>{location}</div>
-            </p>
-            <p>
-              <div class={TCCss.insidecardtext}>Price per tourist $ &nbsp;&nbsp;:</div>
-              <div className={TCCss.dataComingToCard}>{price}</div>
-            </p>
-            <p>
-              <div class={TCCss.insidecardtext}>Tourists:&nbsp;</div>
-              <div className={TCCss.dataComingToCard}>{number_of_persons}</div>
-            </p>
-          
+            <div className={TCCss.infoContainer}>
+              
+                <span className={TCCss.insidecardtext}>Location:</span>
+                <span className={TCCss.dataComingToCard}><span style={{marginLeft:'122px'}}>{location}</span></span>
+              <br />
+              
+                <span className={TCCss.insidecardtext}>Price per tourist $:</span>
+                <span className={TCCss.dataComingToCard}><span style={{marginLeft:'52px'}}>{price}</span></span>
+                <br />
+              
+                <span className={TCCss.insidecardtext}>Tourists:</span>
+                <span className={TCCss.dataComingToCard}><span style={{marginLeft:'130px'}}>{number_of_persons}</span></span>
+                <br />
+              
+                <span className={TCCss.insidecardtext}>Tour Days:</span>
+                <span className={TCCss.dataComingToCard}><span style={{marginLeft:'115px'}}>{number_of_days}</span></span>
+                <br />
+            </div>
             {showTooltip && (
               <div className={TCCss.tooltip}>Tour Added to Favorite</div>
             )}
